@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__github__actions_list",
+      "mcp__github__list_pull_requests",
+      "mcp__github__list_branches",
+      "mcp__github__list_issues",
+      "mcp__github__list_commits",
+      "mcp__Notion__notion-search",
+      "mcp__Google_Drive__search_files",
+      "mcp__Gmail__get_thread",
+      "mcp__Gmail__list_drafts",
+      "mcp__Gmail__search_threads"
+    ]
+  }
+}
