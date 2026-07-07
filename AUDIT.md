@@ -148,12 +148,29 @@ Le terme « vault » n'existe nulle part dans Notion ; les seuls résultats Driv
 
 ## 4. Plan d'action priorisé
 
-### P0 — Sécurité (à faire immédiatement)
+### ✅ Correctifs P0 déjà appliqués (7 juillet 2026)
+
+Les correctifs de sécurité critiques ont été appliqués dans la foulée de l'audit :
+
+- **veloce-sneakers (Supabase)** : le secret `admin_secret` de `private.config` a été **rotationné** vers une valeur aléatoire de 28 caractères jamais commitée → l'ancien code `veloce2026` (publié) ne déverrouille plus rien. *(Nouveau code transmis à Martin hors dépôt.)*
+- **citation (PR [#30](https://github.com/martinbouvet2000-tech/citation/pull/30))** : XSS réfléchi corrigé (`search.liquid`), constante `veloce2026` + mode admin hors-ligne supprimés, room Firebase par défaut remplacée par une room aléatoire par appareil. Preview Vercel déployée avec succès.
+- **business-idea-radar (PR [#1](https://github.com/martinbouvet2000-tech/business-idea-radar/pull/1))** : CLI invoqué en génération seule (`--tools ""`) au lieu de `--permission-mode auto`, contenu Reddit encadré comme non-fiable.
+- **nous-deux (Supabase)** : policies RLS toujours-vraies `anon`/`PUBLIC` sur `album_memories`, `daily_questions`, `streaks` réécrites en `authenticated` uniquement ; `search_path` fixé sur les 5 fonctions. **Advisors sécurité : 17 → 6** (restants = listing bucket, 2 RPC anon, toggles Auth — reclassés P1).
+
+Reste en P1 (nécessite une vraie authentification, non fait unilatéralement) : passer les RPC admin veloce sous Supabase Auth + révoquer `EXECUTE` pour `anon` ; règles de sécurité Firebase ; restreindre le listing du bucket `album-photos`.
+
+### P0 — Sécurité (statut)
+1. ✅ **Code admin `veloce2026` rotationné côté serveur** (Citation/VÉLOCE). Durcissement restant (P1) : révoquer `EXECUTE` pour `anon`/`authenticated` sur les 4 RPC `admin_*` une fois Supabase Auth en place.
+
+<details><summary>Actions P0 initialement recommandées (avant correctifs)</summary>
+
 1. **Révoquer/changer le code admin `veloce2026`** (Citation/VÉLOCE — committé + documenté publiquement) **et révoquer `EXECUTE` pour `anon`/`authenticated` sur les 4 RPC `admin_*` du vault veloce-sneakers** — en l'état, le catalogue live est modifiable par n'importe qui via REST.
 2. **Corriger le XSS réfléchi** de la recherche (Citation).
 3. **Réécrire les policies RLS toujours-vraies** du vault `nous-deux` (`album_memories`, `daily_questions`, `streaks`) avec scoping `auth.uid()`.
 4. **Désamorcer l'injection de prompt** de business-idea-radar (contenu Reddit → CLI en `--permission-mode auto`).
 5. **Sécuriser/authentifier Firebase RTDB** de l'app Oral PASS (room partagée publique).
+
+</details>
 
 ### P1 — Réparer ce qui est cassé
 6. streamflix : lockfile + choix Vercel *ou* `generateStaticParams` + recherche client + secret TMDB en CI.
