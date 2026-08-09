@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="PromptForge — transforme tes questions brutes en prompts de guerre, organisés par sessions avec mémoire de contexte.">
+<title>PromptForge ⚡ Forge tes prompts</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E⚡%3C/text%3E%3C/svg%3E">
+<style>
+/* ============================================================
+   PromptForge — design "forge de nuit"
+   Fonds fer chaud, accent métal en fusion, mono pour l'acier.
+   ============================================================ */
+:root{
+  --bg0:#141110;          /* page — fer froid */
+  --bg1:#1a1613;          /* panneaux */
+  --bg2:#211c17;          /* cartes */
+  --bg3:#2a241e;          /* survol / champs */
+  --line:#372f26;
+  --line2:#4c4136;
+  --tx:#ede6da;           /* blanc chaud */
+  --tx2:#a99d8e;
+  --tx3:#756a5c;
+  --amber:#ffa03a;        /* métal en fusion */
+  --amber-soft:rgba(255,160,58,.14);
+  --amber-line:rgba(255,160,58,.38);
+  --fire:linear-gradient(135deg,#ff8e2b,#ffcf5e);
+  --ok:#84c46f;
+  --bad:#e5615c;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,sans-serif;
+  --mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,"Liberation Mono",monospace;
+  --r:10px;
+  --shadow:0 10px 30px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--bg0);
+  color:var(--tx);
+  font-family:var(--sans);
+  font-size:15px;
+  line-height:1.5;
+  overflow:hidden;
+}
+button{font-family:inherit;color:inherit;background:none;border:none;cursor:pointer}
+input,textarea,select{font-family:inherit;color:var(--tx);background:var(--bg3);border:1px solid var(--line2);border-radius:8px;font-size:14px}
+input:focus,textarea:focus,select:focus,button:focus-visible{outline:2px solid var(--amber-line);outline-offset:1px}
+::placeholder{color:var(--tx3)}
+::selection{background:rgba(255,160,58,.3)}
+*{scrollbar-width:thin;scrollbar-color:var(--line2) transparent}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-thumb{background:var(--line2);border-radius:9px}
+::-webkit-scrollbar-track{background:transparent}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* ---------- structure ---------- */
+#app{display:flex;height:100dvh}
+
+/* ---------- sidebar ---------- */
+#sidebar{
+  width:284px;flex:0 0 284px;display:flex;flex-direction:column;
+  background:var(--bg1);border-right:1px solid var(--line);
+  transition:transform .22s ease;z-index:40;
+}
+.brand{display:flex;align-items:center;gap:9px;padding:18px 16px 12px}
+.brand-mark{
+  width:34px;height:34px;border-radius:9px;background:var(--fire);
+  display:grid;place-items:center;font-size:19px;
+  box-shadow:0 0 18px rgba(255,150,45,.35);
+}
+.brand-name{font-size:18px;letter-spacing:.2px}
+.brand-name b{
+  font-weight:800;
+  background:var(--fire);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.brand-sub{font-size:10.5px;color:var(--tx3);font-family:var(--mono);letter-spacing:.6px;text-transform:uppercase;margin-top:1px}
+.side-actions{padding:4px 12px 10px;display:flex;flex-direction:column;gap:8px}
+.btn-new{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--fire);color:#241300;font-weight:700;font-size:14px;
+  border-radius:9px;padding:10px;box-shadow:0 4px 14px rgba(255,140,40,.25);
+  transition:filter .15s;
+}
+.btn-new:hover{filter:brightness(1.07)}
+.side-search{width:100%;padding:8px 11px;font-size:13.5px}
+#session-list{flex:1;overflow-y:auto;padding:2px 8px 10px;display:flex;flex-direction:column;gap:2px}
+.list-label{font-size:10.5px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.9px;color:var(--tx3);padding:10px 8px 4px}
+.sess{
+  display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:8px;
+  cursor:pointer;border-left:3px solid transparent;position:relative;
+}
+.sess:hover{background:var(--bg2)}
+.sess.active{background:var(--bg2);border-left-color:var(--amber)}
+.sess-body{flex:1;min-width:0}
+.sess-title{font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sess-meta{font-size:11px;color:var(--tx3);font-family:var(--mono)}
+.sess-pin{font-size:12px;color:var(--tx3);padding:3px}
+.sess-pin.pinned{color:var(--amber)}
+.sess-del{font-size:12px;color:var(--tx3);padding:3px;border-radius:5px}
+.sess-del:hover{color:var(--bad);background:rgba(229,97,92,.12)}
+.sess-del.arm{color:#fff;background:var(--bad);font-size:10.5px;padding:3px 6px}
+.sess .sess-pin,.sess .sess-del{opacity:0}
+.sess:hover .sess-pin,.sess:hover .sess-del,.sess-pin.pinned{opacity:1}
+.side-foot{border-top:1px solid var(--line);padding:10px 12px;display:flex;flex-direction:column;gap:7px}
+.foot-row{display:flex;gap:6px}
+.btn-ghost{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:6px;
+  font-size:12.5px;color:var(--tx2);padding:7px 6px;border-radius:7px;border:1px solid var(--line);
+}
+.btn-ghost:hover{background:var(--bg2);color:var(--tx)}
+.foot-stats{font-size:11px;color:var(--tx3);font-family:var(--mono);text-align:center}
+.foot-stats b{color:var(--amber)}
+
+/* ---------- zone principale ---------- */
+#main{flex:1;display:flex;flex-direction:column;min-width:0}
+#topbar{
+  display:flex;align-items:center;gap:10px;padding:12px 18px;
+  border-bottom:1px solid var(--line);background:var(--bg1);
+}
+#burger{display:none;font-size:19px;padding:4px 8px;color:var(--tx2)}
+.title-wrap{flex:1;min-width:0}
+#session-title{
+  font-size:16.5px;font-weight:700;background:transparent;border:1px solid transparent;
+  border-radius:7px;padding:3px 8px;width:100%;max-width:520px;color:var(--tx);
+}
+#session-title:hover{border-color:var(--line)}
+#session-title:focus{background:var(--bg3);border-color:var(--line2)}
+.title-meta{font-size:11.5px;color:var(--tx3);font-family:var(--mono);padding-left:9px}
+.top-btn{
+  display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--tx2);
+  border:1px solid var(--line);border-radius:8px;padding:7px 11px;position:relative;white-space:nowrap;
+}
+.top-btn:hover{background:var(--bg2);color:var(--tx)}
+.top-btn.on{border-color:var(--amber-line);color:var(--amber);background:var(--amber-soft)}
+.ctx-dot{position:absolute;top:-3px;right:-3px;width:9px;height:9px;border-radius:50%;background:var(--amber);display:none}
+.top-btn .ctx-dot.show{display:block}
+
+/* ---------- panneau contexte ---------- */
+#ctx-panel{
+  display:none;border-bottom:1px solid var(--line);background:var(--bg1);
+  padding:14px 22px;gap:10px;flex-direction:column;
+}
+#ctx-panel.open{display:flex}
+.ctx-head{display:flex;align-items:center;gap:8px;font-size:12px;font-family:var(--mono);
+  text-transform:uppercase;letter-spacing:.8px;color:var(--tx2)}
+.ctx-chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{
+  font-size:12px;font-family:var(--mono);color:var(--amber);
+  background:var(--amber-soft);border:1px solid var(--amber-line);
+  padding:3px 9px;border-radius:20px;
+}
+.chip.empty{color:var(--tx3);background:var(--bg2);border-color:var(--line)}
+#ctx-notes{width:100%;min-height:64px;resize:vertical;padding:9px 11px;font-size:13.5px;line-height:1.5}
+.ctx-hint{font-size:11.5px;color:var(--tx3)}
+
+/* ---------- fil ---------- */
+#feed{flex:1;overflow-y:auto;padding:22px 22px 10px;scroll-behavior:smooth}
+.feed-inner{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+
+.empty{
+  margin:auto;text-align:center;max-width:520px;padding:40px 20px;
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+}
+.empty-bolt{
+  width:74px;height:74px;border-radius:20px;background:var(--fire);
+  display:grid;place-items:center;font-size:38px;
+  box-shadow:0 0 45px rgba(255,150,45,.35);
+}
+.empty h2{font-size:21px}
+.empty p{color:var(--tx2);font-size:14px}
+.examples{display:flex;flex-direction:column;gap:8px;width:100%;margin-top:6px}
+.example{
+  text-align:left;font-size:13.5px;color:var(--tx2);background:var(--bg2);
+  border:1px solid var(--line);border-radius:9px;padding:10px 13px;transition:border-color .15s;
+}
+.example:hover{border-color:var(--amber-line);color:var(--tx)}
+.example span{color:var(--amber);margin-right:7px}
+
+.ask{
+  align-self:flex-end;max-width:78%;
+  background:var(--bg3);border:1px solid var(--line2);
+  border-radius:12px 12px 3px 12px;padding:9px 14px;font-size:14px;
+  white-space:pre-wrap;word-break:break-word;
+}
+.ask.refine-ask{border-style:dashed;color:var(--tx2);font-size:13px}
+.ask.refine-ask::before{content:"🔧 ";opacity:.8}
+
+.forge-card{
+  background:var(--bg2);border:1px solid var(--line);border-radius:12px;
+  overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.25);
+}
+.fc-head{
+  display:flex;align-items:center;gap:7px;flex-wrap:wrap;
+  padding:9px 13px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.015);
+}
+.badge{
+  font-size:11px;font-family:var(--mono);padding:2.5px 8px;border-radius:20px;
+  border:1px solid var(--line2);color:var(--tx2);white-space:nowrap;
+}
+.badge.intent{color:var(--amber);border-color:var(--amber-line);background:var(--amber-soft)}
+.fc-time{font-size:11px;color:var(--tx3);font-family:var(--mono);margin-left:auto}
+.icon-btn{font-size:14px;color:var(--tx2);padding:4px 7px;border-radius:6px;line-height:1}
+.icon-btn:hover{background:var(--bg3);color:var(--tx)}
+.icon-btn.starred{color:var(--amber)}
+.fc-body{padding:0}
+.fc-body pre{
+  font-family:var(--mono);font-size:12.8px;line-height:1.62;color:var(--tx);
+  white-space:pre-wrap;word-break:break-word;padding:15px 17px;max-height:520px;overflow-y:auto;
+}
+.fc-foot{display:flex;align-items:center;gap:8px;padding:8px 13px;border-top:1px solid var(--line)}
+.fc-copy{
+  display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;
+  color:#241300;background:var(--fire);border-radius:7px;padding:6px 13px;
+}
+.fc-copy:hover{filter:brightness(1.07)}
+.fc-refine-toggle{font-size:12.5px;color:var(--tx2);padding:6px 10px;border:1px solid var(--line);border-radius:7px}
+.fc-refine-toggle:hover{color:var(--tx);background:var(--bg3)}
+.refine-row{display:none;gap:8px;padding:0 13px 11px}
+.refine-row.open{display:flex}
+.refine-row input{flex:1;padding:8px 11px;font-size:13px}
+.refine-go{font-size:12.5px;font-weight:600;color:var(--amber);border:1px solid var(--amber-line);
+  background:var(--amber-soft);border-radius:7px;padding:0 14px}
+.refine-go:hover{filter:brightness(1.1)}
+
+/* ---------- composer ---------- */
+#composer{border-top:1px solid var(--line);background:var(--bg1);padding:12px 22px 14px}
+.composer-inner{max-width:860px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
+.composer-opts{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.opt-select{font-size:12px;font-family:var(--mono);padding:5px 9px;border-radius:20px;
+  background:var(--bg2);border:1px solid var(--line2);color:var(--tx2);cursor:pointer}
+.opt-select option{background:var(--bg2);color:var(--tx)}
+.mode-tag{margin-left:auto;font-size:11px;font-family:var(--mono);color:var(--tx3)}
+.mode-tag b{color:var(--amber);font-weight:600}
+.composer-row{display:flex;gap:10px;align-items:flex-end}
+#ask-input{
+  flex:1;resize:none;min-height:48px;max-height:190px;padding:12px 14px;
+  font-size:14.5px;line-height:1.45;border-radius:11px;
+}
+#forge-btn{
+  display:flex;align-items:center;gap:8px;font-size:14.5px;font-weight:800;
+  color:#241300;background:var(--fire);border-radius:11px;padding:12px 20px;
+  box-shadow:0 4px 16px rgba(255,140,40,.3);white-space:nowrap;transition:filter .15s;
+}
+#forge-btn:hover{filter:brightness(1.07)}
+#forge-btn:disabled{opacity:.6;cursor:wait;filter:grayscale(.3)}
+.composer-hint{font-size:11px;color:var(--tx3);text-align:right;font-family:var(--mono)}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(36,19,0,.35);
+  border-top-color:#241300;border-radius:50%;animation:rot .7s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+
+/* ---------- modales ---------- */
+.overlay{
+  position:fixed;inset:0;background:rgba(10,8,6,.65);backdrop-filter:blur(3px);
+  display:none;place-items:center;z-index:100;padding:18px;
+}
+.overlay.open{display:grid}
+.modal{
+  width:100%;max-width:520px;max-height:88dvh;overflow-y:auto;
+  background:var(--bg1);border:1px solid var(--line2);border-radius:14px;box-shadow:var(--shadow);
+}
+.modal-head{display:flex;align-items:center;gap:10px;padding:15px 18px;border-bottom:1px solid var(--line)}
+.modal-head h3{font-size:16px;flex:1}
+.modal-x{font-size:17px;color:var(--tx3);padding:4px 8px;border-radius:6px}
+.modal-x:hover{color:var(--tx);background:var(--bg3)}
+.modal-body{padding:16px 18px;display:flex;flex-direction:column;gap:14px}
+.set-group{display:flex;flex-direction:column;gap:7px}
+.set-label{font-size:11.5px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.8px;color:var(--tx2)}
+.set-row{display:flex;gap:8px}
+.set-row input,.set-row select{flex:1;padding:9px 11px;font-size:13.5px}
+.seg{display:flex;border:1px solid var(--line2);border-radius:9px;overflow:hidden}
+.seg button{flex:1;padding:9px;font-size:13px;color:var(--tx2);background:var(--bg2)}
+.seg button.on{background:var(--amber-soft);color:var(--amber);font-weight:700}
+.set-note{font-size:12px;color:var(--tx3);line-height:1.55}
+.set-note a{color:var(--amber)}
+.btn-line{
+  display:flex;align-items:center;justify-content:center;gap:7px;font-size:13px;
+  border:1px solid var(--line2);border-radius:8px;padding:9px;color:var(--tx2);
+}
+.btn-line:hover{background:var(--bg3);color:var(--tx)}
+.btn-line.danger{color:var(--bad);border-color:rgba(229,97,92,.4)}
+.btn-line.danger:hover{background:rgba(229,97,92,.12)}
+.btn-line.danger.arm{background:var(--bad);color:#fff}
+.test-status{font-size:12.5px;font-family:var(--mono)}
+.test-status.ok{color:var(--ok)}
+.test-status.bad{color:var(--bad)}
+.fav-item{border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.fav-q{font-size:12.5px;color:var(--tx2);padding:8px 11px;background:var(--bg2);display:flex;gap:8px;align-items:center}
+.fav-q span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fav-copy{font-size:11.5px;color:var(--amber);border:1px solid var(--amber-line);border-radius:6px;padding:3px 9px;white-space:nowrap}
+.fav-pre{font-family:var(--mono);font-size:11.5px;color:var(--tx3);padding:8px 11px;max-height:110px;overflow:hidden;white-space:pre-wrap;word-break:break-word}
+.modal-empty{text-align:center;color:var(--tx3);font-size:13.5px;padding:20px 0}
+
+/* ---------- toast ---------- */
+#toasts{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;gap:8px;z-index:200;align-items:center}
+.toast{
+  background:var(--bg3);border:1px solid var(--line2);border-radius:9px;
+  padding:9px 16px;font-size:13.5px;box-shadow:var(--shadow);
+  animation:pop .18s ease;max-width:90vw;text-align:center;
+}
+.toast.ok{border-color:rgba(132,196,111,.5)}
+.toast.bad{border-color:rgba(229,97,92,.5)}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- mobile ---------- */
+#scrim{position:fixed;inset:0;background:rgba(10,8,6,.55);z-index:35;display:none}
+@media (max-width:900px){
+  #sidebar{position:fixed;top:0;left:0;bottom:0;transform:translateX(-100%)}
+  #sidebar.open{transform:none;box-shadow:var(--shadow)}
+  #scrim.show{display:block}
+  #burger{display:block}
+  #feed{padding:16px 12px 8px}
+  #composer{padding:10px 12px calc(12px + env(safe-area-inset-bottom))}
+  .ask{max-width:92%}
+  #topbar{padding:10px 12px}
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ===== Barre latérale : sessions ===== -->
+  <aside id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">⚡</div>
+      <div>
+        <div class="brand-name">Prompt<b>Forge</b></div>
+        <div class="brand-sub">machine de guerre à prompts</div>
+      </div>
+    </div>
+    <div class="side-actions">
+      <button class="btn-new" id="new-session-btn">+ Nouvelle session</button>
+      <input class="side-search" id="search-input" type="search" placeholder="Rechercher une session…">
+    </div>
+    <nav id="session-list" aria-label="Sessions"></nav>
+    <div class="side-foot">
+      <div class="foot-row">
+        <button class="btn-ghost" id="open-settings">⚙️ Réglages</button>
+        <button class="btn-ghost" id="open-favs">★ Favoris</button>
+      </div>
+      <div class="foot-row">
+        <button class="btn-ghost" id="export-all">⬇ Sauvegarde</button>
+        <button class="btn-ghost" id="import-all">⬆ Importer</button>
+      </div>
+      <div class="foot-stats" id="stats-line"></div>
+    </div>
+  </aside>
+  <div id="scrim"></div>
+
+  <!-- ===== Zone principale ===== -->
+  <section id="main">
+    <header id="topbar">
+      <button id="burger" aria-label="Ouvrir le menu">☰</button>
+      <div class="title-wrap">
+        <input id="session-title" aria-label="Titre de la session" maxlength="80">
+        <div class="title-meta" id="session-meta"></div>
+      </div>
+      <button class="top-btn" id="ctx-toggle" title="Contexte de la session">🧠 Contexte<span class="ctx-dot" id="ctx-dot"></span></button>
+      <button class="top-btn" id="export-md" title="Exporter la session en Markdown">📄 .md</button>
+    </header>
+
+    <div id="ctx-panel">
+      <div class="ctx-head">🧠 Mémoire de la session — utilisée pour chaque nouveau prompt</div>
+      <div class="ctx-chips" id="ctx-chips"></div>
+      <textarea id="ctx-notes" placeholder="Notes permanentes pour cette session : projet, contraintes, public visé, style préféré… Tout ce que tu écris ici sera intégré à chaque prompt."></textarea>
+      <div class="ctx-hint">Le contexte se construit aussi automatiquement à partir de tes demandes précédentes dans cette session.</div>
+    </div>
+
+    <main id="feed"><div class="feed-inner" id="feed-inner"></div></main>
+
+    <footer id="composer">
+      <div class="composer-inner">
+        <div class="composer-opts">
+          <select class="opt-select" id="intent-select" title="Type de demande">
+            <option value="auto">🎯 Détection auto</option>
+          </select>
+          <select class="opt-select" id="style-select" title="Style du prompt">
+            <option value="structure">🧱 Complet</option>
+            <option value="concis">⚡ Concis</option>
+            <option value="expert">🔥 Expert+</option>
+          </select>
+          <span class="mode-tag" id="mode-tag"></span>
+        </div>
+        <div class="composer-row">
+          <textarea id="ask-input" rows="1" placeholder="Balance ta question brute… (Ctrl+Entrée pour forger)"></textarea>
+          <button id="forge-btn">⚡ Forger</button>
+        </div>
+        <div class="composer-hint">Ctrl+Entrée · le prompt s'adapte au contexte de la session</div>
+      </div>
+    </footer>
+  </section>
+</div>
+
+<!-- ===== Modale réglages ===== -->
+<div class="overlay" id="settings-overlay">
+  <div class="modal" role="dialog" aria-label="Réglages">
+    <div class="modal-head"><h3>⚙️ Réglages</h3><button class="modal-x" data-close="settings-overlay">✕</button></div>
+    <div class="modal-body">
+      <div class="set-group">
+        <div class="set-label">Moteur de forge</div>
+        <div class="seg" id="mode-seg">
+          <button data-mode="local">🔩 Moteur local</button>
+          <button data-mode="ai">🤖 IA (Claude)</button>
+        </div>
+        <div class="set-note" id="mode-note"></div>
+      </div>
+      <div class="set-group" id="ai-settings">
+        <div class="set-label">Clé API Anthropic</div>
+        <div class="set-row">
+          <input id="api-key-input" type="password" placeholder="sk-ant-…" autocomplete="off" spellcheck="false">
+          <button class="btn-line" id="key-eye" style="flex:0 0 auto" title="Afficher / masquer">👁</button>
+        </div>
+        <div class="set-label" style="margin-top:4px">Modèle</div>
+        <div class="set-row">
+          <select id="model-select">
+            <option value="claude-opus-5">Claude Opus 5 — le plus puissant (défaut)</option>
+            <option value="claude-sonnet-5">Claude Sonnet 5 — rapide et malin</option>
+            <option value="claude-haiku-4-5">Claude Haiku 4.5 — le plus rapide</option>
+          </select>
+        </div>
+        <button class="btn-line" id="test-api">🔌 Tester la connexion</button>
+        <div class="test-status" id="test-status"></div>
+        <div class="set-note">Ta clé reste <b>uniquement dans ton navigateur</b> (localStorage) et n'est envoyée qu'à l'API d'Anthropic. Crée une clé sur <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a>. Sans clé, le moteur local fonctionne à 100 % hors-ligne et gratuitement.</div>
+      </div>
+      <div class="set-group">
+        <div class="set-label">Données</div>
+        <button class="btn-line" id="settings-export">⬇ Exporter toutes mes données (JSON)</button>
+        <button class="btn-line" id="settings-import">⬆ Importer une sauvegarde</button>
+        <button class="btn-line danger" id="wipe-all">🗑 Tout effacer</button>
+        <div class="set-note">Tout est stocké en local dans ton navigateur. Pense à exporter une sauvegarde de temps en temps.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Modale favoris ===== -->
+<div class="overlay" id="favs-overlay">
+  <div class="modal" role="dialog" aria-label="Favoris">
+    <div class="modal-head"><h3>★ Bibliothèque de favoris</h3><button class="modal-x" data-close="favs-overlay">✕</button></div>
+    <div class="modal-body" id="favs-body"></div>
+  </div>
+</div>
+
+<div id="toasts"></div>
+<input type="file" id="import-file" accept="application/json" hidden>
+
+<script>
+'use strict';
+/* ================================================================
+   PromptForge — moteur local + sessions + mode IA optionnel
+   ================================================================ */
+
+/* ---------------- utilitaires ---------------- */
+const $ = s => document.querySelector(s);
+const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm = s => String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+const escRe = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+function debounce(fn, ms){ let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; }
+function relTime(ts){
+  const d = Date.now() - ts;
+  if (d < 60e3) return 'à l\'instant';
+  if (d < 3600e3) return `il y a ${Math.floor(d/60e3)} min`;
+  if (d < 86400e3) return `il y a ${Math.floor(d/3600e3)} h`;
+  if (d < 7*86400e3) return `il y a ${Math.floor(d/86400e3)} j`;
+  return new Date(ts).toLocaleDateString('fr-FR', {day:'numeric', month:'short'});
+}
+function toast(msg, kind){
+  const el = document.createElement('div');
+  el.className = 'toast' + (kind ? ' ' + kind : '');
+  el.textContent = msg;
+  $('#toasts').appendChild(el);
+  setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity .3s'; }, 2400);
+  setTimeout(() => el.remove(), 2800);
+}
+async function copyText(txt){
+  try { await navigator.clipboard.writeText(txt); return true; }
+  catch(e){
+    const ta = document.createElement('textarea');
+    ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    let ok = false; try { ok = document.execCommand('copy'); } catch(_){}
+    ta.remove(); return ok;
+  }
+}
+
+/* ---------------- stockage ---------------- */
+const LS_KEY = 'promptforge.v1';
+let state = load();
+function load(){
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (raw){ const d = JSON.parse(raw); if (d && Array.isArray(d.sessions)) return d; }
+  } catch(e){}
+  return { version: 1,
+    settings: { apiKey: '', model: 'claude-opus-5', mode: 'local', style: 'structure' },
+    activeSessionId: null, sessions: [] };
+}
+let saveTimer = null;
+function flushSave(){
+  if (saveTimer){ clearTimeout(saveTimer); saveTimer = null; }
+  try { localStorage.setItem(LS_KEY, JSON.stringify(state)); }
+  catch(e){ toast('Stockage plein — exporte puis nettoie tes sessions', 'bad'); }
+}
+function save(){ clearTimeout(saveTimer); saveTimer = setTimeout(flushSave, 120); }
+/* jamais perdre une forge : on vide la file dès que l'onglet se cache ou se ferme */
+window.addEventListener('pagehide', flushSave);
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushSave(); });
+function activeSession(){ return state.sessions.find(s => s.id === state.activeSessionId) || null; }
+function createSession(title){
+  const s = { id: uid(), title: title || 'Nouvelle session', createdAt: Date.now(), updatedAt: Date.now(),
+    pinned: false, notes: '', entries: [] };
+  state.sessions.unshift(s);
+  state.activeSessionId = s.id;
+  save();
+  return s;
+}
+
+/* ================================================================
+   MOTEUR DE FORGE (local)
+   ================================================================ */
+const STOPWORDS = new Set(('le la les un une des de du au aux et ou mais donc or ni car que qui quoi dont ou est sont suis es ete etre avoir ai as a avons avez ont dans pour avec sans sous sur par plus moins tres bien mal tout tous toute toutes ce cet cette ces mon ton son ma ta sa mes tes ses notre votre leur nos vos leurs je tu il elle on nous vous ils elles me te se lui y en ne pas plus jamais rien quelque chose comme si alors quand comment pourquoi combien quel quelle quels quelles faire fait faut veux veut voudrais aimerais peux peut pouvez dois doit besoin the a an of to in on for with and or but is are was were be been being have has had do does did will would can could should this that these those it its my your his her our their i you he she we they me him them what which who when where why how from as at by not no yes so then than there here also very just about into over under again more most some any each other such only own same'
+).split(' '));
+
+const INTENTS = {
+  image: {
+    label: '🎨 Image', order: 0,
+    kw: ['image','logo','illustration','dessin','dessine','affiche','poster','midjourney','dall-e','dalle','stable diffusion','flux','visuel','icone','wallpaper','fond d\'ecran','photo de','genere une image','portrait de','pochette','banniere','miniature','thumbnail'],
+    role: { fr: 'directeur artistique expert en génération d\'images par IA', en: 'an expert AI image-generation art director' }
+  },
+  code: {
+    label: '💻 Code & Dev', order: 1,
+    kw: ['code','coder','bug','fonction','script','api','application','app','programme','developpe','developper','react','python','javascript','typescript','java','sql','base de donnees','html','css','algorithme','erreur','debug','corriger','logiciel','backend','frontend','node','php','plugin','extension','automatiser','automatisation','bot','scraper','github','git','serveur','deployer','deploiement','docker','site web','site internet','vba','formule excel','regex','json','android','ios','flutter','swift','jeu video','unity','creer une app','creer un site','creer un logiciel','faire une app','faire un site','coder un','app mobile','application mobile','site vitrine','developper un'],
+    role: { fr: 'développeur senior full-stack et architecte logiciel avec plus de 15 ans d\'expérience en production. Tu écris du code propre, robuste et maintenable, et tu expliques tes choix techniques simplement', en: 'a senior full-stack developer and software architect with 15+ years of production experience' },
+    steps: ['Reformule le besoin en une phrase pour valider ta compréhension.','Propose l\'architecture ou l\'approche technique la plus adaptée (technologies recommandées et pourquoi).','Écris le code complet, fonctionnel, commenté aux endroits clés.','Anticipe les erreurs possibles et gère-les proprement.','Termine par les instructions exactes pour installer, lancer et tester.'],
+    reqs: ['Code complet et fonctionnel : aucun pseudo-code, aucun « à compléter plus tard ».','Bonnes pratiques actuelles du langage et du framework choisis.','Gestion des erreurs et des cas limites incluse.','Si plusieurs approches existent, choisis la meilleure et justifie-la en une phrase.'],
+    format: 'Brève explication de l\'approche, puis le code dans des blocs bien séparés, puis les instructions d\'utilisation étape par étape.',
+    check: 'le code s\'exécute sans erreur, il ne manque rien pour le lancer, et un débutant peut suivre tes instructions'
+  },
+  adminlegal: {
+    label: '⚖️ Admin & Juridique', order: 2,
+    kw: ['resiliation','resilier','contrat','juridique','droit','loi','avocat','litige','remboursement','reclamation','administration','caf','impots','impot','prefecture','preavis','bail','locataire','proprietaire','assurance','mutuelle','mise en demeure','attestation','demarche','recours','amende','plainte','prud','licenciement','demission','heritage','succession'],
+    role: { fr: 'expert des démarches administratives et juridiques françaises, précis, pragmatique et pédagogue', en: 'an expert in administrative and legal procedures' },
+    steps: ['Identifie précisément la situation et ce qui est en jeu.','Explique les règles applicables en langage simple (avec les références utiles : articles de loi, délais légaux).','Donne la marche à suivre concrète, étape par étape, avec les délais à respecter.','Si un document est nécessaire (lettre, réclamation…), rédige-le entièrement, prêt à envoyer.','Signale clairement les pièges à éviter et les cas où consulter un professionnel devient indispensable.'],
+    reqs: ['Informations exactes et prudentes : si un point dépend de la situation exacte, dis-le explicitement.','Références concrètes (textes, organismes, sites officiels) quand c\'est pertinent.','Zéro jargon non expliqué.'],
+    format: 'Réponse structurée : situation → règles applicables → plan d\'action étape par étape → document prêt à l\'emploi si nécessaire.',
+    check: 'la marche à suivre est réalisable immédiatement et aucune étape obligatoire ne manque'
+  },
+  translation: {
+    label: '🌍 Traduction', order: 3,
+    kw: ['traduis','traduire','traduction','en anglais','en francais','en espagnol','en allemand','en italien','en portugais','en japonais','translate'],
+    role: { fr: 'traducteur professionnel natif dans les deux langues, spécialiste des nuances culturelles et idiomatiques', en: 'a professional native translator in both languages' },
+    steps: ['Traduis le texte en respectant le sens, le ton et le registre de l\'original.','Adapte les expressions idiomatiques plutôt que de les traduire mot à mot.','Signale les passages ambigus et propose des alternatives quand plusieurs traductions sont valables.'],
+    reqs: ['Naturel absolu : la traduction ne doit jamais « sentir » la traduction.','Respect du registre (formel / familier) et du contexte culturel.','Conserve la mise en forme du texte d\'origine.'],
+    format: 'La traduction complète d\'abord, puis (si utile) une courte note sur les choix de traduction délicats.',
+    check: 'un natif ne pourrait pas deviner qu\'il s\'agit d\'une traduction'
+  },
+  summary: {
+    label: '📋 Synthèse', order: 4,
+    kw: ['resume','resumer','synthese','synthetise','raccourcis','tldr','points cles','essentiel','condense','recapitule','recap'],
+    role: { fr: 'expert en synthèse d\'information : tu extrais l\'essentiel sans jamais déformer le propos', en: 'an expert at synthesizing information' },
+    steps: ['Identifie l\'idée centrale et les messages vraiment importants.','Élimine le superflu sans perdre de nuance essentielle.','Hiérarchise : du plus important au moins important.'],
+    reqs: ['Fidélité totale au contenu d\'origine : aucune interprétation ajoutée.','Concision maximale sans perte de sens.','Les chiffres et faits clés sont conservés tels quels.'],
+    format: 'L\'idée centrale en une phrase, puis les points clés en liste hiérarchisée, puis « à retenir pour agir » si pertinent.',
+    check: 'quelqu\'un qui ne lit que ta synthèse comprend l\'essentiel sans contresens'
+  },
+  data: {
+    label: '📊 Données', order: 5,
+    kw: ['donnees','tableau','excel','csv','statistique','stats','graphique','moyenne','calcul','budget','finance','depense','depenses','analyse de donnees','kpi','pourcentage','rentabilite','previsionnel','chiffre'],
+    role: { fr: 'data analyst senior, rigoureux sur les chiffres et pédagogue sur les conclusions', en: 'a senior data analyst' },
+    steps: ['Clarifie la question à laquelle les données doivent répondre.','Structure ou analyse les données de façon rigoureuse (détaille tes calculs).','Dégage les enseignements principaux, en séparant faits et interprétations.','Conclus avec des recommandations concrètes chiffrées.'],
+    reqs: ['Tous les calculs sont vérifiables : montre les étapes.','Signale les limites des données ou les hypothèses que tu fais.','Résultats présentés de façon visuelle quand c\'est possible (tableaux).'],
+    format: 'Tableau(x) clair(s) + analyse en points clés + recommandations chiffrées.',
+    check: 'chaque chiffre annoncé est exact et recalculable'
+  },
+  marketing: {
+    label: '📈 Business', order: 6,
+    kw: ['marketing','vente','vendre','client','prospect','business','entreprise','lancement','lancer','produit','marque','branding','seo','publicite','pub','campagne','reseaux sociaux','instagram','tiktok','linkedin','youtube','audience','croissance','growth','monetiser','business plan','etude de marche','pricing','prix de vente','offre','startup','freelance','auto-entrepreneur','micro-entreprise','boutique','e-commerce','dropshipping','abonnes','followers','communaute','newsletter'],
+    role: { fr: 'expert en marketing digital et stratégie de croissance, obsédé par les résultats mesurables et le concret', en: 'a digital marketing and growth strategy expert' },
+    steps: ['Clarifie l\'objectif business et la cible précise.','Analyse rapidement le contexte : marché, concurrence, positionnement.','Propose une stratégie priorisée : ce qui rapportera le plus, en premier.','Détaille chaque action : quoi faire exactement, comment, avec quels outils (gratuits de préférence).','Définis comment mesurer le succès de chaque action.'],
+    reqs: ['Concret et actionnable dès demain matin : zéro conseil vague.','Adapté à un petit budget sauf indication contraire.','Exemples réels ou modèles réutilisables à l\'appui.'],
+    format: 'Plan d\'action priorisé : pour chaque action → objectif, étapes précises, outils, indicateur de réussite.',
+    check: 'chaque recommandation est applicable immédiatement sans compétence introuvable'
+  },
+  writing: {
+    label: '✍️ Rédaction', order: 7,
+    kw: ['ecris','ecrire','redige','rediger','article','texte','email','mail','lettre','message','post','publication','blog','histoire','roman','poeme','discours','cv','lettre de motivation','bio','biographie','description','slogan','titre','script video','annonce','story','legende','caption','chanson','paroles','discours de mariage','faire-part','invitation','reponse a','repondre a'],
+    role: { fr: 'rédacteur professionnel et copywriter primé, capable d\'adapter ton style à n\'importe quel support et n\'importe quelle audience', en: 'an award-winning professional writer and copywriter' },
+    steps: ['Identifie l\'objectif du texte, l\'audience et le ton le plus adapté.','Structure le texte pour un maximum d\'impact (accroche, corps, chute).','Rédige une version finale soignée, prête à l\'emploi.','Propose 2 variantes d\'accroche ou de titre pour laisser le choix.'],
+    reqs: ['Ton naturel et humain : bannis les tournures robotiques et les clichés.','Phrases variées en rythme et en longueur.','Zéro remplissage : chaque phrase apporte quelque chose.','Longueur et style adaptés au support (email court, article développé…).'],
+    format: 'Le texte final prêt à copier-coller, puis 2 variantes d\'accroche ou de titre.',
+    check: 'le texte est prêt à être envoyé ou publié tel quel, sans retouche nécessaire'
+  },
+  learning: {
+    label: '🎓 Explication', order: 8,
+    kw: ['explique','expliquer','comprendre','apprendre','apprends-moi','c\'est quoi','qu\'est-ce que','comment fonctionne','comment marche','cours','lecon','formation','tutoriel','tuto','debutant','simplement','vulgarise','initiation','pour les nuls','difference entre'],
+    role: { fr: 'pédagogue d\'exception : tu rends limpides les sujets les plus complexes grâce à des analogies concrètes et une progression logique', en: 'an exceptional teacher who makes complex topics crystal clear' },
+    steps: ['Pars de zéro : ne suppose aucun prérequis.','Donne d\'abord l\'idée essentielle en une phrase simple.','Explique progressivement, du plus simple au plus précis, avec des analogies de la vie quotidienne.','Illustre avec au moins un exemple concret.','Termine par un mini-résumé mémorisable en 3 points.'],
+    reqs: ['Aucun terme technique sans définition immédiate en langage courant.','Analogies concrètes tirées du quotidien.','Progression logique : chaque étape s\'appuie sur la précédente.'],
+    format: 'Explication progressive par paliers, un mini-résumé final en 3 points, puis une proposition d\'approfondissement.',
+    check: 'une personne qui découvre totalement le sujet comprend chaque phrase du premier coup'
+  },
+  analysis: {
+    label: '🧠 Analyse', order: 9,
+    kw: ['analyse','analyser','compare','comparaison','comparer','etudie','evalue','avantages','inconvenients','pour et contre','meilleur choix','decision','decider','strategie','risque','risques','opportunite','pourquoi','difference','versus','vs','audit','diagnostic','avis sur','que penses-tu','vaut-il mieux','choisir','hesite','lequel','laquelle'],
+    role: { fr: 'consultant et analyste stratégique senior, réputé pour tes analyses structurées, nuancées et sans langue de bois', en: 'a senior strategy consultant and analyst' },
+    steps: ['Cadre la question : qu\'est-ce qu\'on cherche vraiment à décider ou comprendre, selon quels critères ?','Rassemble les faits et éléments pertinents.','Analyse sous plusieurs angles, avec des ordres de grandeur chiffrés quand c\'est possible.','Pèse honnêtement le pour et le contre de chaque option.','Conclus avec une recommandation claire et assumée.'],
+    reqs: ['Distingue explicitement : faits établis / estimations / opinions.','Pas de langue de bois : prends position et assume.','Mentionne le principal contre-argument à ta propre conclusion.'],
+    format: 'Synthèse de la conclusion en 3 phrases d\'abord, puis l\'analyse détaillée par sections, puis recommandation finale et prochaines étapes.',
+    check: 'ta recommandation est claire, justifiée, et tient compte des objections évidentes'
+  },
+  brainstorm: {
+    label: '💡 Idées', order: 10,
+    kw: ['idee','idees','brainstorm','brainstorming','propose','proposition','suggestion','suggere','inspiration','trouve-moi','liste de','alternatives','nom pour','noms pour','theme','concept','originale','originales','creatif','cadeau','surprise','activite'],
+    role: { fr: 'facilitateur créatif expert en idéation, capable de générer des idées à la fois originales et réellement faisables', en: 'a creative facilitator and ideation expert' },
+    steps: ['Cadre le défi créatif : objectif, contraintes, public.','Génère un large éventail d\'idées, des plus sûres aux plus inattendues.','Développe les meilleures en expliquant pourquoi elles fonctionnent.','Pour le top 3, donne la première étape concrète pour se lancer.'],
+    reqs: ['Bannis les clichés et les idées vues mille fois.','Chaque idée tient en une phrase claire + un court développement.','Mélange assumé : valeurs sûres, paris audacieux, idées inattendues.'],
+    format: 'Minimum 12 idées classées en 3 catégories (✅ valeurs sûres / 🚀 audacieuses / 🌀 inattendues), puis un top 3 justifié avec première étape.',
+    check: 'au moins 3 idées sont réellement surprenantes et aucune n\'est un cliché'
+  },
+  general: {
+    label: '⚡ Général', order: 99,
+    kw: [],
+    role: { fr: 'assistant expert polyvalent de très haut niveau, rigoureux, direct et concret', en: 'a highly capable, rigorous and direct expert assistant' },
+    steps: ['Reformule la demande en une phrase pour valider ta compréhension.','Réponds de façon complète, structurée et directement exploitable.','Signale ce qui est incertain ou dépend du contexte.','Termine en proposant la prochaine étape logique.'],
+    reqs: ['Précision et honnêteté : signale les limites de ta réponse.','Structure claire, sans blabla introductif.','Concret avant tout : exemples et applications pratiques.'],
+    format: 'Réponse directe et structurée, avec des titres si elle est longue.',
+    check: 'la réponse est complète, exacte et directement utilisable'
+  }
+};
+
+/* mots-clés précompilés en regex avec frontières de mots */
+const INTENT_MATCHERS = Object.entries(INTENTS).map(([id, def]) => ({
+  id, order: def.order,
+  matchers: def.kw.map(k => ({ re: new RegExp('(^|[^a-z0-9])' + escRe(norm(k)) + '([^a-z0-9]|$)'), w: k.length >= 7 ? 2 : 1 }))
+})).sort((a, b) => a.order - b.order);
+
+function detectIntent(text){
+  const t = norm(text);
+  let best = 'general', bestScore = 0;
+  for (const it of INTENT_MATCHERS){
+    let s = 0;
+    for (const m of it.matchers) if (m.re.test(t)) s += m.w;
+    if (s > bestScore){ bestScore = s; best = it.id; }
+  }
+  return bestScore >= 2 ? best : (bestScore >= 1 && best !== 'general' ? best : 'general');
+}
+
+function detectLang(text){
+  const words = norm(text).split(/[^a-z']+/).filter(Boolean);
+  const fr = new Set(['le','la','les','un','une','des','est','et','avec','pour','je','tu','que','qui','ne','pas','sur','dans','ce','cette','mon','ma','mes','moi','faire','veux','du','de','au','comment','pourquoi','ecris','donne']);
+  const en = new Set(['the','is','are','with','for','i','you','that','this','my','a','an','to','of','and','how','what','write','me','it','in','on','can','please','make','want','need']);
+  let f = 0, e = 0;
+  for (const w of words){ if (fr.has(w)) f++; if (en.has(w)) e++; }
+  return (e >= 3 && e > f * 1.4) ? 'en' : 'fr';
+}
+
+/* verbes d'instruction : utiles dans une demande, mais pas des « sujets » */
+const ASK_VERBS = new Set('creer cree ajoute ajouter ecris ecrire redige rediger propose proposer donne donner explique expliquer maintenant aussi ensuite besoin aide aider peux mets mettre utilise utiliser change changer modifie modifier version idee idees'.split(' '));
+function extractTopics(session){
+  const freq = new Map();   /* clé normalisée → { n, display } */
+  const texts = [session.notes || '', ...session.entries.map(en => en.question)];
+  for (const txt of texts){
+    for (const raw of String(txt).split(/[^\p{L}\p{N}']+/u)){
+      const w = norm(raw);
+      if (w.length < 4 || STOPWORDS.has(w) || ASK_VERBS.has(w)) continue;
+      const cur = freq.get(w);
+      if (cur) cur.n++;
+      else freq.set(w, { n: 1, display: raw.toLowerCase() });
+    }
+  }
+  return [...freq.values()].sort((a, b) => b.n - a.n).slice(0, 5).map(x => x.display);
+}
+
+/* bloc contexte de session, injecté dans les prompts */
+function buildContextBlock(session, excludeEntryId, lang){
+  const prev = session.entries.filter(en => en.kind !== 'refine' && en.id !== excludeEntryId).slice(-4);
+  const notes = (session.notes || '').trim();
+  if (!prev.length && !notes) return '';
+  const topics = extractTopics(session);
+  if (lang === 'en'){
+    let b = '## SESSION CONTEXT\n';
+    if (topics.length) b += `This request is part of ongoing work about: ${topics.join(', ')}.\n`;
+    if (prev.length){
+      b += 'Previous requests in this session:\n';
+      prev.forEach((en, i) => { b += `${i + 1}. "${en.question.slice(0, 140)}"\n`; });
+    }
+    if (notes) b += `Key information provided by the user: ${notes}\n`;
+    b += 'Take all of this context into account: stay consistent with what came before, do not start from scratch — this new request builds on the previous exchanges.';
+    return b;
+  }
+  let b = '## CONTEXTE DE LA SESSION\n';
+  if (topics.length) b += `Cette demande s'inscrit dans un travail en cours autour de : ${topics.join(', ')}.\n`;
+  if (prev.length){
+    b += 'Demandes précédentes dans cette session :\n';
+    prev.forEach((en, i) => { b += `${i + 1}. « ${en.question.slice(0, 140)} »\n`; });
+  }
+  if (notes) b += `Informations importantes fournies par l'utilisateur : ${notes}\n`;
+  b += 'Tiens compte de tout ce contexte : reste cohérent avec ce qui précède, ne repars pas de zéro — cette nouvelle demande s\'appuie sur les échanges précédents.';
+  return b;
+}
+
+/* ------- constructeur principal ------- */
+function forgeLocal({ question, intent, style, session, excludeEntryId, extraReqs = [], formatOverride = null, lang = null }){
+  const q = cap(question.trim());
+  lang = lang || detectLang(q);
+  intent = intent && intent !== 'auto' ? intent : detectIntent(q);
+  if (intent === 'image') return { text: forgeImage(q), intent, lang };
+  const def = INTENTS[intent] || INTENTS.general;
+  const ctx = buildContextBlock(session, excludeEntryId, lang);
+
+  if (lang === 'en') return { text: forgeEnglish({ q, def, ctx, style, extraReqs, formatOverride }), intent, lang };
+
+  const role = def.role.fr;
+  const fmt = formatOverride || def.format;
+
+  if (style === 'concis'){
+    const roleShort = role.split(/[.,]/)[0];
+    const topics = extractTopics(session);
+    const ctxLine = (ctx && topics.length) ? `Contexte : on travaille déjà ensemble sur ${topics.slice(0, 3).join(', ')} — reste cohérent avec ce qui précède. ` : '';
+    const reqs = [...def.reqs.slice(0, 3), ...extraReqs].map(r => r.replace(/\.$/, '')).join(' ; ');
+    return { text:
+`Agis comme ${roleShort}. ${ctxLine}
+Ma demande : ${q}
+Exigences : ${reqs}.
+Format attendu : ${fmt}
+Si un point essentiel est flou, pose-moi d'abord ta question avant de répondre.`, intent, lang };
+  }
+
+  const lines = [];
+  lines.push(`Tu es ${role}.`);
+  if (ctx) lines.push('', ctx);
+  lines.push('', '## MISSION', q);
+  lines.push('', '## DÉMARCHE À SUIVRE');
+  def.steps.forEach((s, i) => lines.push(`${i + 1}. ${s}`));
+  if (style === 'expert'){
+    lines.push('', '## MÉTHODE DE TRAVAIL',
+      '- Avant de rédiger, construis mentalement un plan complet et vérifie qu\'il couvre toute la mission.',
+      '- Après un premier jet, relis-toi de façon critique : corrige, renforce, coupe ce qui n\'apporte rien. Ne montre que la version finale.',
+      '- Vise le niveau d\'un livrable professionnel facturé très cher : précis, dense, sans remplissage.');
+  }
+  lines.push('', '## EXIGENCES');
+  def.reqs.forEach(r => lines.push(`- ${r}`));
+  extraReqs.forEach(r => lines.push(`- ${r}`));
+  if (style === 'expert') lines.push('- Va au-delà de l\'évidence : apporte au moins un angle ou une idée que je n\'aurais pas trouvés seul.');
+  lines.push('', '## FORMAT DE RÉPONSE', fmt);
+  lines.push('', '## AVANT DE RÉPONDRE',
+    `- Vérifie que : ${def.check}.`,
+    '- Si des informations essentielles te manquent pour un résultat vraiment adapté, commence par me poser tes questions (3 maximum), puis attends mes réponses.');
+  return { text: lines.join('\n'), intent, lang };
+}
+
+function forgeEnglish({ q, def, ctx, style, extraReqs, formatOverride }){
+  const role = def.role.en;
+  const lines = [];
+  lines.push(`You are ${role}. You deliver outstanding, production-quality work.`);
+  if (ctx) lines.push('', ctx);
+  lines.push('', '## MISSION', q);
+  lines.push('', '## APPROACH',
+    '1. Restate the request in one sentence to confirm your understanding.',
+    '2. Deliver a complete, well-structured, immediately usable answer.',
+    '3. Anticipate edge cases and flag anything uncertain.');
+  if (style === 'expert'){
+    lines.push('', '## WORKING METHOD',
+      '- Plan before writing; after a first draft, critically review and improve it. Show only the final version.',
+      '- Aim for the quality of an expensive professional deliverable: precise, dense, zero filler.');
+  }
+  lines.push('', '## REQUIREMENTS',
+    '- Complete and directly usable output — no placeholders.',
+    '- Clear structure, no fluff.',
+    '- Be honest about limitations or assumptions.');
+  extraReqs.forEach(r => lines.push(`- ${r}`));
+  lines.push('', '## OUTPUT FORMAT', formatOverride || 'A structured answer with headings if long, direct prose otherwise.');
+  lines.push('', '## BEFORE ANSWERING',
+    '- If essential information is missing for a truly tailored result, ask me your questions first (3 max), then wait for my answers.');
+  return lines.join('\n');
+}
+
+/* ------- prompts d'image ------- */
+function forgeImage(q){
+  let subject = norm(q) === '' ? q : q;
+  subject = subject
+    .replace(/^(dessine[- ]?moi|dessine|génère[- ]?moi|génère|genere[- ]?moi|genere|crée[- ]?moi|crée|cree[- ]?moi|cree|fais[- ]?moi|fais|je veux|j'aimerais|il me faut|donne[- ]?moi)\s+/i, '')
+    .replace(/^(une?\s+|des\s+|le\s+|la\s+|les\s+)?(image|logo|illustration|photo|affiche|poster|visuel|icône|icone|dessin|portrait|bannière|banniere)\s*(de\s+la\s+|de\s+|d'|du\s+|des\s+|pour\s+|représentant\s+|representant\s+)?/i, '')
+    .trim();
+  if (!subject) subject = q.trim();
+  return `## PROMPT PRINCIPAL (à coller dans Midjourney, DALL·E, Flux, Ideogram…)
+${cap(subject)}, highly detailed, professional quality, sharp focus, coherent composition, dramatic cinematic lighting, rich color palette, 8k
+
+## VARIANTE MIDJOURNEY
+${cap(subject)}, cinematic lighting, ultra detailed --ar 3:2 --style raw --v 6
+
+## POUR AFFINER, AJOUTE À LA FIN DU PROMPT
+- Un style : photorealistic · flat illustration · 3D render · watercolor · pixel art · line art minimalist
+- Une ambiance : golden hour light · neon glow · morning mist · dark moody atmosphere
+- Un cadrage : close-up · wide angle · top view · portrait format (--ar 2:3)
+
+## CONSEIL
+Décris toujours : sujet précis → style → lumière → cadrage. Un détail concret (matière, couleur, époque) vaut mieux que trois adjectifs vagues.`;
+}
+
+/* ------- affinage local ------- */
+function parseRefinement(instr){
+  const t = norm(instr);
+  const out = { styleOverride: null, langOverride: null, extraReqs: [], formatOverride: null, matched: false };
+  if (/(plus court|court|concis|resume|condense|raccourci|simplifie)/.test(t)){ out.styleOverride = 'concis'; out.matched = true; }
+  if (/(plus long|plus de detail|detaille|developpe|approfondis|plus complet|etoffe)/.test(t)){ out.styleOverride = 'expert'; out.matched = true; }
+  if (/(anglais|english)/.test(t)){ out.langOverride = 'en'; out.matched = true; }
+  if (/(francais|french)/.test(t) && !/(anglais|english)/.test(t)){ out.langOverride = 'fr'; out.matched = true; }
+  if (/tableau/.test(t)){ out.formatOverride = 'Présente l\'essentiel de ta réponse sous forme de tableau clair, avec une courte explication autour.'; out.matched = true; }
+  if (/(liste|bullet|puces)/.test(t)){ out.formatOverride = 'Réponds sous forme de liste à puces hiérarchisée, du plus important au moins important.'; out.matched = true; }
+  const tone = t.match(/ton (?:plus )?([a-zà-ÿ-]+)/);
+  const toneWords = t.match(/(formel|amical|professionnel|decontracte|serieux|fun|chaleureux|direct|percutant|humoristique|drole|soutenu|familier)/);
+  if (tone || toneWords){
+    out.extraReqs.push(`Adopte un ton ${tone ? tone[1] : toneWords[1]} du début à la fin de ta réponse.`);
+    out.matched = true;
+  }
+  return out;
+}
+function rootQuestionOf(entry, session){
+  let cur = entry;
+  while (cur && cur.parentId){ cur = session.entries.find(e => e.id === cur.parentId); }
+  return cur ? cur.question : entry.question;
+}
+function refineLocal(entry, instruction, session){
+  const ops = parseRefinement(instruction);
+  if (!ops.matched){
+    return {
+      text: entry.prompt + `\n\n## AJUSTEMENT PRIORITAIRE\n${cap(instruction.trim())}\nApplique cet ajustement à l'ensemble des instructions ci-dessus ; en cas de conflit, cet ajustement l'emporte.`,
+      intent: entry.intent, lang: entry.lang || 'fr'
+    };
+  }
+  return forgeLocal({
+    question: rootQuestionOf(entry, session),
+    intent: entry.intent,
+    style: ops.styleOverride || entry.style || state.settings.style,
+    session, excludeEntryId: entry.id,
+    extraReqs: ops.extraReqs,
+    formatOverride: ops.formatOverride,
+    lang: ops.langOverride
+  });
+}
+
+/* ================================================================
+   MODE IA — API Anthropic directe depuis le navigateur
+   ================================================================ */
+const STYLE_DESC = {
+  structure: 'complet et structuré en sections (rôle, contexte, mission, démarche, exigences, format, contrôle qualité)',
+  concis: 'compact et percutant : 5 à 8 lignes maximum, uniquement l\'essentiel',
+  expert: 'niveau expert maximal : structuré, avec méthode de travail exigeante, auto-relecture demandée et haut niveau d\'ambition'
+};
+function aiSystemPrompt(style){
+  return `Tu es le moteur de PromptForge, un expert de classe mondiale en prompt engineering.
+On te donne la demande brute d'un utilisateur, parfois accompagnée du contexte de sa session de travail. Ta mission : la transformer en un prompt d'exception, prêt à être collé tel quel dans une IA générative (Claude, ChatGPT, Gemini…).
+
+Règles absolues :
+- Réponds UNIQUEMENT avec le prompt final. Aucune introduction, aucun commentaire, aucune balise de code autour.
+- Écris le prompt dans la langue de la demande (français par défaut).
+- Donne à l'IA un rôle d'expert précis et pertinent pour la demande.
+- Structure le prompt clairement ; intègre les non-dits évidents de la demande (objectif réel, audience probable, critères de qualité).
+- Si un contexte de session est fourni, le prompt doit s'inscrire dans la continuité de ce travail : cohérent avec les demandes précédentes, sans repartir de zéro.
+- Termine par une instruction demandant à l'IA de poser ses questions (3 max) si des informations essentielles manquent.
+- Si la demande vise une génération d'image, produis à la place un prompt d'image optimisé (sujet précis, style, composition, lumière, paramètres utiles).
+- Style demandé pour ce prompt : ${STYLE_DESC[style] || STYLE_DESC.structure}.`;
+}
+async function forgeAI({ question, session, style, excludeEntryId, refineOf, instruction }){
+  const key = state.settings.apiKey.trim();
+  const ctx = buildContextBlock(session, excludeEntryId, detectLang(question));
+  let userMsg;
+  if (refineOf){
+    userMsg = `Voici un prompt que tu as déjà produit :\n---\n${refineOf.prompt}\n---\nL'utilisateur demande cet ajustement : « ${instruction} »\nRéécris le prompt complet en appliquant cet ajustement. Réponds uniquement avec le nouveau prompt.`;
+  } else {
+    userMsg = (ctx ? ctx + '\n\n' : '') + `Demande brute de l'utilisateur : « ${question} »`;
+  }
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 120000);
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      signal: ctrl.signal,
+      headers: {
+        'content-type': 'application/json',
+        'x-api-key': key,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: state.settings.model || 'claude-opus-5',
+        max_tokens: 8192,
+        system: aiSystemPrompt(style),
+        messages: [{ role: 'user', content: userMsg }]
+      })
+    });
+    if (!res.ok){
+      let msg = `Erreur API (${res.status})`;
+      try { const j = await res.json(); if (j.error && j.error.message) msg += ' : ' + j.error.message.slice(0, 160); } catch(_){}
+      if (res.status === 401) msg = 'Clé API invalide ou révoquée (401)';
+      if (res.status === 429) msg = 'Limite de requêtes atteinte, réessaie dans un instant (429)';
+      throw new Error(msg);
+    }
+    const data = await res.json();
+    if (data.stop_reason === 'refusal') throw new Error('La requête a été refusée par les filtres de sécurité du modèle.');
+    const block = (data.content || []).find(b => b.type === 'text' && b.text && b.text.trim());
+    if (!block) throw new Error('Réponse vide du modèle.');
+    return block.text.trim();
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/* ================================================================
+   INTERFACE
+   ================================================================ */
+const feedEl = $('#feed'), feedInner = $('#feed-inner');
+let searchTerm = '';
+
+function init(){
+  if (!state.sessions.length) createSession('Première session');
+  if (!activeSession()) state.activeSessionId = state.sessions[0].id;
+  const sel = $('#intent-select');
+  Object.entries(INTENTS).forEach(([id, def]) => {
+    if (id === 'general') return;
+    const o = document.createElement('option');
+    o.value = id; o.textContent = def.label;
+    sel.appendChild(o);
+  });
+  $('#style-select').value = state.settings.style || 'structure';
+  bindEvents();
+  renderAll();
+}
+
+function renderAll(){ renderSidebar(); renderMain(); renderModeTag(); }
+
+function renderSidebar(){
+  const list = $('#session-list');
+  list.innerHTML = '';
+  const term = norm(searchTerm);
+  const match = s => !term || norm(s.title).includes(term) || s.entries.some(e => norm(e.question).includes(term));
+  const pinned = state.sessions.filter(s => s.pinned && match(s));
+  const others = state.sessions.filter(s => !s.pinned && match(s));
+  const addGroup = (label, items) => {
+    if (!items.length) return;
+    const lab = document.createElement('div');
+    lab.className = 'list-label'; lab.textContent = label;
+    list.appendChild(lab);
+    items.forEach(s => list.appendChild(sessionItem(s)));
+  };
+  addGroup('📌 Épinglées', pinned);
+  addGroup('Sessions', others);
+  if (!pinned.length && !others.length){
+    const d = document.createElement('div');
+    d.className = 'modal-empty'; d.textContent = 'Aucune session trouvée';
+    list.appendChild(d);
+  }
+  const total = state.sessions.reduce((n, s) => n + s.entries.length, 0);
+  $('#stats-line').innerHTML = `<b>${total}</b> prompt${total > 1 ? 's' : ''} forgé${total > 1 ? 's' : ''} · ${state.sessions.length} session${state.sessions.length > 1 ? 's' : ''}`;
+}
+
+function sessionItem(s){
+  const el = document.createElement('div');
+  el.className = 'sess' + (s.id === state.activeSessionId ? ' active' : '');
+  el.innerHTML = `
+    <div class="sess-body">
+      <div class="sess-title">${esc(s.title)}</div>
+      <div class="sess-meta">${s.entries.length} prompt${s.entries.length > 1 ? 's' : ''} · ${relTime(s.updatedAt)}</div>
+    </div>
+    <button class="sess-pin${s.pinned ? ' pinned' : ''}" title="Épingler">📌</button>
+    <button class="sess-del" title="Supprimer">🗑</button>`;
+  el.addEventListener('click', e => {
+    if (e.target.closest('.sess-pin') || e.target.closest('.sess-del')) return;
+    state.activeSessionId = s.id; save(); renderAll(); closeSidebarMobile();
+  });
+  el.querySelector('.sess-pin').addEventListener('click', () => { s.pinned = !s.pinned; save(); renderSidebar(); });
+  const del = el.querySelector('.sess-del');
+  del.addEventListener('click', () => {
+    if (!del.classList.contains('arm')){
+      del.classList.add('arm'); del.textContent = 'Confirmer ?';
+      setTimeout(() => { del.classList.remove('arm'); del.textContent = '🗑'; }, 2500);
+      return;
+    }
+    state.sessions = state.sessions.filter(x => x.id !== s.id);
+    if (state.activeSessionId === s.id) state.activeSessionId = state.sessions[0] ? state.sessions[0].id : null;
+    if (!state.sessions.length) createSession('Nouvelle session');
+    save(); renderAll();
+    toast('Session supprimée');
+  });
+  return el;
+}
+
+function renderMain(){
+  const s = activeSession();
+  if (!s) return;
+  $('#session-title').value = s.title;
+  $('#session-meta').textContent = `${s.entries.length} prompt${s.entries.length > 1 ? 's' : ''} · créée ${relTime(s.createdAt)}`;
+  $('#ctx-notes').value = s.notes || '';
+  $('#ctx-dot').classList.toggle('show', !!(s.notes || '').trim());
+  renderCtxChips(s);
+  feedInner.innerHTML = '';
+  if (!s.entries.length){
+    feedInner.appendChild(emptyState());
+  } else {
+    s.entries.forEach(en => {
+      feedInner.appendChild(askBubble(en));
+      feedInner.appendChild(forgeCard(en, s));
+    });
+  }
+  requestAnimationFrame(() => { feedEl.scrollTop = feedEl.scrollHeight; });
+}
+
+function renderCtxChips(s){
+  const wrap = $('#ctx-chips');
+  wrap.innerHTML = '';
+  const topics = extractTopics(s);
+  if (!topics.length){
+    const c = document.createElement('span');
+    c.className = 'chip empty';
+    c.textContent = 'Le contexte apparaîtra ici après ta première demande';
+    wrap.appendChild(c);
+    return;
+  }
+  topics.forEach(t => {
+    const c = document.createElement('span');
+    c.className = 'chip'; c.textContent = t;
+    wrap.appendChild(c);
+  });
+}
+
+function emptyState(){
+  const d = document.createElement('div');
+  d.className = 'empty';
+  d.innerHTML = `
+    <div class="empty-bolt">⚡</div>
+    <h2>Balance ta question brute.</h2>
+    <p>PromptForge la transforme en prompt de guerre : rôle expert, exigences, format, contrôle qualité. Et chaque nouvelle demande dans cette session tiendra compte des précédentes.</p>
+    <div class="examples">
+      <button class="example"><span>→</span>Je veux créer une app pour suivre mes dépenses</button>
+      <button class="example"><span>→</span>Écris un mail pour relancer un client qui ne répond pas</button>
+      <button class="example"><span>→</span>Explique-moi comment fonctionne la blockchain</button>
+    </div>`;
+  d.querySelectorAll('.example').forEach(b => {
+    b.addEventListener('click', () => {
+      $('#ask-input').value = b.textContent.replace('→', '').trim();
+      $('#ask-input').focus();
+      autogrow();
+    });
+  });
+  return d;
+}
+
+function askBubble(en){
+  const d = document.createElement('div');
+  d.className = 'ask' + (en.kind === 'refine' ? ' refine-ask' : '');
+  d.textContent = en.question;
+  return d;
+}
+
+const STYLE_LABEL = { structure: '🧱 Complet', concis: '⚡ Concis', expert: '🔥 Expert+' };
+function forgeCard(en, session){
+  const card = document.createElement('article');
+  card.className = 'forge-card';
+  card.dataset.id = en.id;
+  const intentLabel = (INTENTS[en.intent] || INTENTS.general).label;
+  card.innerHTML = `
+    <div class="fc-head">
+      <span class="badge intent">${esc(intentLabel)}</span>
+      <span class="badge">${esc(STYLE_LABEL[en.style] || en.style || '')}</span>
+      <span class="badge">${en.mode === 'ai' ? '🤖 IA' : '🔩 local'}</span>
+      <span class="fc-time">${relTime(en.createdAt)}</span>
+      <button class="icon-btn star ${en.favorite ? 'starred' : ''}" title="Favori">${en.favorite ? '★' : '☆'}</button>
+    </div>
+    <div class="fc-body"><pre></pre></div>
+    <div class="fc-foot">
+      <button class="fc-copy">📋 Copier le prompt</button>
+      <button class="fc-refine-toggle">🔧 Affiner</button>
+    </div>
+    <div class="refine-row">
+      <input type="text" placeholder="Ex : plus court · ton plus formel · en anglais · sous forme de tableau · ajoute un exemple…">
+      <button class="refine-go">→</button>
+    </div>`;
+  card.querySelector('pre').textContent = en.prompt;
+  card.querySelector('.fc-copy').addEventListener('click', async e => {
+    const ok = await copyText(en.prompt);
+    toast(ok ? '⚡ Prompt copié — colle-le dans ton IA' : 'Impossible de copier', ok ? 'ok' : 'bad');
+  });
+  const star = card.querySelector('.star');
+  star.addEventListener('click', () => {
+    en.favorite = !en.favorite;
+    star.classList.toggle('starred', en.favorite);
+    star.textContent = en.favorite ? '★' : '☆';
+    save();
+  });
+  const row = card.querySelector('.refine-row');
+  const input = row.querySelector('input');
+  card.querySelector('.fc-refine-toggle').addEventListener('click', () => {
+    row.classList.toggle('open');
+    if (row.classList.contains('open')) input.focus();
+  });
+  const goRefine = () => {
+    const instr = input.value.trim();
+    if (!instr) return;
+    input.value = '';
+    row.classList.remove('open');
+    submitRefinement(en, instr, session);
+  };
+  row.querySelector('.refine-go').addEventListener('click', goRefine);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') goRefine(); });
+  return card;
+}
+
+/* ---------------- génération ---------------- */
+let forging = false;
+async function submitAsk(){
+  if (forging) return;
+  const input = $('#ask-input');
+  const q = input.value.trim();
+  if (!q){ input.focus(); return; }
+  const session = activeSession();
+  const style = $('#style-select').value;
+  const intentSel = $('#intent-select').value;
+  state.settings.style = style;
+
+  const entry = {
+    id: uid(), kind: 'ask', question: q, prompt: '', createdAt: Date.now(),
+    style, intent: 'general', lang: 'fr', mode: 'local', favorite: false, parentId: null
+  };
+  setForging(true);
+  try {
+    if (state.settings.mode === 'ai' && state.settings.apiKey.trim()){
+      entry.intent = intentSel !== 'auto' ? intentSel : detectIntent(q);
+      try {
+        entry.prompt = await forgeAI({ question: q, session, style, excludeEntryId: entry.id });
+        entry.mode = 'ai';
+      } catch(err){
+        toast('IA indisponible (' + err.message + ') → moteur local utilisé', 'bad');
+        const r = forgeLocal({ question: q, intent: intentSel, style, session, excludeEntryId: entry.id });
+        entry.prompt = r.text; entry.intent = r.intent; entry.lang = r.lang;
+      }
+    } else {
+      const r = forgeLocal({ question: q, intent: intentSel, style, session, excludeEntryId: entry.id });
+      entry.prompt = r.text; entry.intent = r.intent; entry.lang = r.lang;
+    }
+    session.entries.push(entry);
+    session.updatedAt = Date.now();
+    if (session.entries.length === 1 && (session.title === 'Nouvelle session' || session.title === 'Première session')){
+      session.title = q.length > 46 ? q.slice(0, 46).trim() + '…' : q;
+    }
+    input.value = '';
+    autogrow();
+    save();
+    renderAll();
+  } finally {
+    setForging(false);
+    input.focus();
+  }
+}
+
+async function submitRefinement(entry, instruction, session){
+  if (forging) return;
+  setForging(true);
+  const child = {
+    id: uid(), kind: 'refine', question: instruction, prompt: '', createdAt: Date.now(),
+    style: entry.style, intent: entry.intent, lang: entry.lang, mode: 'local',
+    favorite: false, parentId: entry.id
+  };
+  try {
+    if (state.settings.mode === 'ai' && state.settings.apiKey.trim()){
+      try {
+        child.prompt = await forgeAI({ question: instruction, session, style: entry.style, excludeEntryId: child.id, refineOf: entry, instruction });
+        child.mode = 'ai';
+      } catch(err){
+        toast('IA indisponible → moteur local utilisé', 'bad');
+        const r = refineLocal(entry, instruction, session);
+        child.prompt = r.text; child.intent = r.intent; child.lang = r.lang;
+      }
+    } else {
+      const r = refineLocal(entry, instruction, session);
+      child.prompt = r.text; child.intent = r.intent; child.lang = r.lang;
+    }
+    session.entries.push(child);
+    session.updatedAt = Date.now();
+    save();
+    renderAll();
+  } finally {
+    setForging(false);
+  }
+}
+
+function setForging(on){
+  forging = on;
+  const btn = $('#forge-btn');
+  btn.disabled = on;
+  btn.innerHTML = on ? '<span class="spin"></span> Forge en cours…' : '⚡ Forger';
+}
+
+/* ---------------- réglages ---------------- */
+function renderModeTag(){
+  const ai = state.settings.mode === 'ai' && state.settings.apiKey.trim();
+  $('#mode-tag').innerHTML = ai
+    ? `moteur : <b>IA · ${esc(shortModel(state.settings.model))}</b>`
+    : 'moteur : <b>local</b> (gratuit, hors-ligne)';
+}
+function shortModel(m){
+  return { 'claude-opus-5': 'Opus 5', 'claude-sonnet-5': 'Sonnet 5', 'claude-haiku-4-5': 'Haiku 4.5' }[m] || m;
+}
+function openSettings(){
+  $('#api-key-input').value = state.settings.apiKey;
+  $('#model-select').value = state.settings.model;
+  $('#test-status').textContent = '';
+  $('#test-status').className = 'test-status';
+  updateModeSeg();
+  $('#settings-overlay').classList.add('open');
+}
+function updateModeSeg(){
+  document.querySelectorAll('#mode-seg button').forEach(b => b.classList.toggle('on', b.dataset.mode === state.settings.mode));
+  $('#mode-note').textContent = state.settings.mode === 'ai'
+    ? 'Le prompt est généré par Claude à partir de ta demande et du contexte de session. Nécessite une clé API (usage facturé par Anthropic). En cas d\'échec, le moteur local prend le relais automatiquement.'
+    : 'Le moteur local analyse ta demande (type, langue, contexte) et construit le prompt instantanément. Gratuit, illimité, fonctionne sans connexion.';
+}
+async function testApi(){
+  const stat = $('#test-status');
+  const key = $('#api-key-input').value.trim();
+  if (!key){ stat.textContent = 'Renseigne une clé d\'abord.'; stat.className = 'test-status bad'; return; }
+  stat.textContent = 'Test en cours…'; stat.className = 'test-status';
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json', 'x-api-key': key,
+        'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({ model: $('#model-select').value, max_tokens: 512,
+        messages: [{ role: 'user', content: 'Réponds uniquement : OK' }] })
+    });
+    if (res.ok){ stat.textContent = '✓ Connexion réussie — le mode IA est prêt.'; stat.className = 'test-status ok'; }
+    else {
+      let m = `✗ Erreur ${res.status}`;
+      try { const j = await res.json(); if (j.error) m += ' — ' + (j.error.message || '').slice(0, 120); } catch(_){}
+      stat.textContent = m; stat.className = 'test-status bad';
+    }
+  } catch(e){
+    stat.textContent = '✗ Connexion impossible (réseau bloqué ici ? réessaie depuis la version GitHub Pages).';
+    stat.className = 'test-status bad';
+  }
+}
+
+/* ---------------- favoris ---------------- */
+function openFavs(){
+  const body = $('#favs-body');
+  body.innerHTML = '';
+  const favs = [];
+  state.sessions.forEach(s => s.entries.forEach(en => { if (en.favorite) favs.push({ en, s }); }));
+  if (!favs.length){
+    body.innerHTML = '<div class="modal-empty">Aucun favori pour l\'instant.<br>Clique sur ☆ sur un prompt pour le garder ici.</div>';
+  } else {
+    favs.sort((a, b) => b.en.createdAt - a.en.createdAt).forEach(({ en, s }) => {
+      const d = document.createElement('div');
+      d.className = 'fav-item';
+      d.innerHTML = `
+        <div class="fav-q"><span>${esc(en.question)}</span><button class="fav-copy">📋 Copier</button></div>
+        <div class="fav-pre"></div>`;
+      d.querySelector('.fav-pre').textContent = en.prompt.slice(0, 400) + (en.prompt.length > 400 ? '…' : '');
+      d.querySelector('.fav-copy').addEventListener('click', async () => {
+        const ok = await copyText(en.prompt);
+        toast(ok ? '⚡ Prompt copié' : 'Impossible de copier', ok ? 'ok' : 'bad');
+      });
+      body.appendChild(d);
+    });
+  }
+  $('#favs-overlay').classList.add('open');
+}
+
+/* ---------------- import / export ---------------- */
+function download(filename, content, type){
+  const blob = new Blob([content], { type });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+}
+function exportAll(){
+  download(`promptforge-sauvegarde-${new Date().toISOString().slice(0, 10)}.json`,
+    JSON.stringify(state, null, 2), 'application/json');
+  toast('Sauvegarde téléchargée', 'ok');
+}
+function exportSessionMd(){
+  const s = activeSession();
+  if (!s || !s.entries.length){ toast('Rien à exporter dans cette session'); return; }
+  let md = `# ${s.title}\n\n_Session PromptForge · ${new Date(s.createdAt).toLocaleDateString('fr-FR')}_\n\n`;
+  if ((s.notes || '').trim()) md += `**Contexte :** ${s.notes.trim()}\n\n---\n\n`;
+  s.entries.forEach(en => {
+    md += `## ${en.kind === 'refine' ? '🔧 Affinage' : '🔨 Demande'} — ${esc(en.question)}\n\n\`\`\`\n${en.prompt}\n\`\`\`\n\n`;
+  });
+  download(`${s.title.replace(/[^\wÀ-ſ -]/g, '').slice(0, 40) || 'session'}.md`, md, 'text/markdown');
+  toast('Session exportée en .md', 'ok');
+}
+function importFile(file){
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const d = JSON.parse(reader.result);
+      if (!d || !Array.isArray(d.sessions)) throw new Error('format');
+      const existing = new Set(state.sessions.map(s => s.id));
+      let added = 0;
+      d.sessions.forEach(s => { if (!existing.has(s.id)){ state.sessions.push(s); added++; } });
+      if (d.settings && !state.settings.apiKey && d.settings.apiKey) state.settings.apiKey = d.settings.apiKey;
+      state.sessions.sort((a, b) => b.updatedAt - a.updatedAt);
+      if (!activeSession()) state.activeSessionId = state.sessions[0] && state.sessions[0].id;
+      save(); renderAll();
+      toast(added ? `${added} session${added > 1 ? 's' : ''} importée${added > 1 ? 's' : ''}` : 'Sessions déjà présentes — rien à importer', 'ok');
+    } catch(e){ toast('Fichier invalide — utilise une sauvegarde PromptForge', 'bad'); }
+  };
+  reader.readAsText(file);
+}
+
+/* ---------------- events ---------------- */
+function autogrow(){
+  const ta = $('#ask-input');
+  ta.style.height = 'auto';
+  ta.style.height = Math.min(ta.scrollHeight, 190) + 'px';
+}
+function closeSidebarMobile(){
+  $('#sidebar').classList.remove('open');
+  $('#scrim').classList.remove('show');
+}
+function bindEvents(){
+  $('#forge-btn').addEventListener('click', submitAsk);
+  const ask = $('#ask-input');
+  ask.addEventListener('input', autogrow);
+  ask.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter'){ e.preventDefault(); submitAsk(); }
+  });
+  $('#new-session-btn').addEventListener('click', () => {
+    createSession('Nouvelle session'); renderAll(); closeSidebarMobile();
+    $('#ask-input').focus();
+  });
+  $('#search-input').addEventListener('input', e => { searchTerm = e.target.value; renderSidebar(); });
+  $('#session-title').addEventListener('change', e => {
+    const s = activeSession(); if (!s) return;
+    s.title = e.target.value.trim() || 'Sans titre';
+    e.target.value = s.title;
+    save(); renderSidebar();
+  });
+  $('#session-title').addEventListener('keydown', e => { if (e.key === 'Enter') e.target.blur(); });
+  $('#ctx-toggle').addEventListener('click', () => {
+    $('#ctx-panel').classList.toggle('open');
+    $('#ctx-toggle').classList.toggle('on', $('#ctx-panel').classList.contains('open'));
+  });
+  $('#ctx-notes').addEventListener('input', debounce(e => {
+    const s = activeSession(); if (!s) return;
+    s.notes = e.target.value;
+    $('#ctx-dot').classList.toggle('show', !!s.notes.trim());
+    save();
+  }, 250));
+  $('#export-md').addEventListener('click', exportSessionMd);
+  $('#export-all').addEventListener('click', exportAll);
+  $('#settings-export').addEventListener('click', exportAll);
+  const pickFile = () => $('#import-file').click();
+  $('#import-all').addEventListener('click', pickFile);
+  $('#settings-import').addEventListener('click', pickFile);
+  $('#import-file').addEventListener('change', e => {
+    if (e.target.files[0]) importFile(e.target.files[0]);
+    e.target.value = '';
+  });
+  $('#open-settings').addEventListener('click', openSettings);
+  $('#open-favs').addEventListener('click', openFavs);
+  document.querySelectorAll('.modal-x').forEach(b => b.addEventListener('click', () => $('#' + b.dataset.close).classList.remove('open')));
+  document.querySelectorAll('.overlay').forEach(o => o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); }));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.querySelectorAll('.overlay.open').forEach(o => o.classList.remove('open'));
+  });
+  document.querySelectorAll('#mode-seg button').forEach(b => b.addEventListener('click', () => {
+    state.settings.mode = b.dataset.mode;
+    if (b.dataset.mode === 'ai' && !state.settings.apiKey.trim()) toast('Ajoute ta clé API pour activer le mode IA');
+    save(); updateModeSeg(); renderModeTag();
+  }));
+  $('#api-key-input').addEventListener('change', e => { state.settings.apiKey = e.target.value.trim(); save(); renderModeTag(); });
+  $('#key-eye').addEventListener('click', () => {
+    const i = $('#api-key-input');
+    i.type = i.type === 'password' ? 'text' : 'password';
+  });
+  $('#model-select').addEventListener('change', e => { state.settings.model = e.target.value; save(); renderModeTag(); });
+  $('#test-api').addEventListener('click', testApi);
+  const wipe = $('#wipe-all');
+  wipe.addEventListener('click', () => {
+    if (!wipe.classList.contains('arm')){
+      wipe.classList.add('arm'); wipe.textContent = '⚠ Clique encore pour TOUT effacer définitivement';
+      setTimeout(() => { wipe.classList.remove('arm'); wipe.textContent = '🗑 Tout effacer'; }, 3500);
+      return;
+    }
+    localStorage.removeItem(LS_KEY);
+    state = load();
+    createSession('Première session');
+    $('#settings-overlay').classList.remove('open');
+    renderAll(); renderModeTag();
+    toast('Toutes les données ont été effacées');
+  });
+  $('#burger').addEventListener('click', () => {
+    $('#sidebar').classList.add('open');
+    $('#scrim').classList.add('show');
+  });
+  $('#scrim').addEventListener('click', closeSidebarMobile);
+}
+
+init();
+</script>
+</body>
+</html>
