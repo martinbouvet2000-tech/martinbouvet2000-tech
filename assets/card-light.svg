@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="422" viewBox="0 0 860 422" font-family="ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',monospace" font-size="15">
+<style>@keyframes in{from{opacity:0}to{opacity:1}}.r{animation:in .35s ease both}@keyframes blink{50%{opacity:0}}.cur{animation:blink 1s step-end infinite}</style>
+<rect x="1" y="1" width="858" height="420" rx="10" fill="#ffffff" stroke="#d0d7de"/>
+<circle cx="22" cy="20" r="6" fill="#ff5f57"/>
+<circle cx="42" cy="20" r="6" fill="#febc2e"/>
+<circle cx="62" cy="20" r="6" fill="#28c840"/>
+<text x="430.0" y="25" text-anchor="middle" fill="#8c959f" font-size="13">martin@bouvet: ~ neofetch</text>
+<rect class="r" style="animation-delay:0.00s" x="38" y="58" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.12s" x="110" y="58" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.18s" x="146" y="58" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.21s" x="164" y="58" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.24s" x="182" y="58" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.27s" x="200" y="58" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.03s" x="38" y="76" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.06s" x="56" y="76" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.12s" x="92" y="76" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.15s" x="110" y="76" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.21s" x="146" y="76" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.33s" x="218" y="76" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.06s" x="38" y="94" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.12s" x="74" y="94" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.18s" x="110" y="94" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.24s" x="146" y="94" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.36s" x="218" y="94" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.09s" x="38" y="112" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.15s" x="74" y="112" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.21s" x="110" y="112" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.27s" x="146" y="112" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.30s" x="164" y="112" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.33s" x="182" y="112" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.36s" x="200" y="112" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.12s" x="38" y="130" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.24s" x="110" y="130" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.30s" x="146" y="130" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.42s" x="218" y="130" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.15s" x="38" y="148" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.27s" x="110" y="148" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.33s" x="146" y="148" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.45s" x="218" y="148" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.18s" x="38" y="166" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.30s" x="110" y="166" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.36s" x="146" y="166" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.39s" x="164" y="166" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.42s" x="182" y="166" width="15" height="15" rx="3" fill="#bc4c00"/>
+<rect class="r" style="animation-delay:0.45s" x="200" y="166" width="15" height="15" rx="3" fill="#bc4c00"/>
+<text x="137.0" y="220" text-anchor="middle" fill="#8c959f">builder × business</text>
+<text x="137.0" y="242" text-anchor="middle" fill="#8c959f">× AI</text>
+<text class="r" style="animation-delay:0.00s" x="290" y="68" fill="#116329" font-weight="bold" xml:space="preserve">martin@bouvet</text>
+<text class="r" style="animation-delay:0.08s" x="290" y="90" fill="#8c959f" xml:space="preserve">────────────────────────────────────────────</text>
+<text class="r" style="animation-delay:0.16s" x="290" y="112" xml:space="preserve"><tspan fill="#bc4c00">OS</tspan><tspan fill="#8c959f">: </tspan><tspan fill="#0a3069">Global BBA @ emlyon · Lyon, FR</tspan></text>
+<text class="r" style="animation-delay:0.24s" x="290" y="134" xml:space="preserve"><tspan fill="#bc4c00">Training</tspan><tspan fill="#8c959f">: </tspan><tspan fill="#0a3069">Oxford · LLMs, generative &amp; agentic AI</tspan></text>
+<text class="r" style="animation-delay:0.32s" x="290" y="156" xml:space="preserve"><tspan fill="#bc4c00">Role</tspan><tspan fill="#8c959f">: </tspan><tspan fill="#0a3069">Founder in the making · AI-native builder</tspan></text>
+<text class="r" style="animation-delay:0.40s" x="290" y="178" xml:space="preserve"><tspan fill="#bc4c00">Kernel</tspan><tspan fill="#8c959f">: </tspan><tspan fill="#0a3069">Claude Code + Obsidian second brain</tspan></text>
+<text class="r" style="animation-delay:0.48s" x="290" y="200" xml:space="preserve"><tspan fill="#bc4c00">Uptime</tspan><tspan fill="#8c959f">: </tspan><tspan fill="#0a3069">7 months shipping</tspan></text>
+<text class="r" style="animation-delay:0.56s" x="290" y="222" xml:space="preserve"><tspan fill="#bc4c00">Shell</tspan><tspan fill="#8c959f">: </tspan><tspan fill="#0a3069">TypeScript · JavaScript · Python</tspan></text>
+<text class="r" style="animation-delay:0.64s" x="290" y="244" xml:space="preserve"><tspan fill="#bc4c00">Stack</tspan><tspan fill="#8c959f">: </tspan><tspan fill="#0a3069">React · Next.js · Supabase · Vercel</tspan></text>
+<text class="r" style="animation-delay:0.72s" x="290" y="266" xml:space="preserve"><tspan fill="#bc4c00">Agents</tspan><tspan fill="#8c959f">: </tspan><tspan fill="#0a3069">nightly vault agent · IG → notes pipeline</tspan></text>
+<text class="r" style="animation-delay:0.80s" x="290" y="288" xml:space="preserve"><tspan fill="#bc4c00">Building</tspan><tspan fill="#8c959f">: </tspan><tspan fill="#0a3069">e-invoicing readiness audits (FR 2026)</tspan></text>
+<text class="r" style="animation-delay:0.96s" x="290" y="332" fill="#8c959f" xml:space="preserve">─ GitHub ───────────────────────────────────</text>
+<text class="r" style="animation-delay:1.04s" x="290" y="354" xml:space="preserve"><tspan fill="#bc4c00">Repos</tspan><tspan fill="#8c959f">: </tspan><tspan fill="#0a3069">10   Stars 1</tspan></text>
+<text class="r" style="animation-delay:1.12s" x="290" y="376" xml:space="preserve"><tspan fill="#bc4c00">Contrib</tspan><tspan fill="#8c959f">: </tspan><tspan fill="#0a3069">221 (last 12 mo)   Commits 165</tspan></text>
+<text x="290" y="404" fill="#116329">❯ <tspan class="cur" fill="#24292f">█</tspan></text>
+<text x="844" y="410" text-anchor="end" fill="#8c959f" font-size="11">auto-updated 2026-09-22</text>
+</svg>
