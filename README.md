@@ -15,6 +15,7 @@ I'm a business student at emlyon who builds. I studied LLMs, generative and agen
 
 | Project | What it is | Live |
 |---|---|---|
+| **[nightshift](https://github.com/martinbouvet2000-tech/nightshift)** | Open-source second brain that works while you sleep: videos → scored Markdown notes, then a Claude Code agent consolidates the vault overnight. Offline demo in one minute. | [repo](https://github.com/martinbouvet2000-tech/nightshift) |
 | **[Nous Deux](https://github.com/martinbouvet2000-tech/nous-deux)** | Private app for long-distance couples: dual time zones, real-time shared map, shared calendar with PDF/Excel import, time capsules, Web Push. React, TypeScript, Supabase (row-level security on every table, Edge Functions), CI on every push. | [demo](https://martinbouvet2000-tech.github.io/nous-deux/) |
 | **[Business Idea Radar](https://github.com/martinbouvet2000-tech/business-idea-radar)** | Scans Reddit for recurring pain points and ranks them as business opportunities. Python. | [demo](https://martinbouvet2000-tech.github.io/business-idea-radar/) |
 | **[Oral Médecine](https://github.com/martinbouvet2000-tech/oral-medecine)** | Revision app for medical school orals: quizzes, key phrases, progress tracking. | [demo](https://martinbouvet2000-tech.github.io/oral-medecine/) |
