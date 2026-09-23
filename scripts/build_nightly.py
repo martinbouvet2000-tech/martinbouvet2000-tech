@@ -57,11 +57,10 @@ def svg(d):
          f'<desc id="d">Terminal replay of the {d["run_id"]} run: {d["notes"]} notes read, '
          f'{d["links"]} links created, {d["proposals"]} changes proposed for review.</desc>',
          "<style>"
-         # backwards fill: the line holds opacity 0 during its delay, then shows.
-         # If GitHub ever strips this style block, the opacity="1" attribute wins
-         # and the whole terminal still renders — just without the typing.
-         ".l{animation:in .01s linear backwards}"
-         "@keyframes in{from{opacity:0}to{opacity:1}}"
+         # No fade-in on the lines. GitHub renders this file as an <img>, where
+         # Chrome freezes the animation clock at t=0: anything that starts hidden
+         # stays hidden forever. Only the cursor blinks, because its base state is
+         # visible and a frozen clock simply leaves it on.
          "@keyframes blink{50%{opacity:0}}.cur{animation:blink 1.05s step-end infinite}"
          "</style>",
          f'<rect width="{W}" height="{h}" rx="12" fill="{T["bg"]}" stroke="{T["border"]}"/>',
@@ -77,16 +76,14 @@ def svg(d):
         if not row:
             continue
         y = TOP + i * LINE
-        delay = 0.22 + i * 0.26
         # one string, no newline between tspans: xml:space keeps every space literal
         spans = "".join(f'<tspan fill="{c}">{t}</tspan>' for c, t in row)
-        o.append(f'<text class="l" opacity="1" style="animation-delay:{delay:.2f}s" x="{PAD}" y="{y}" '
+        o.append(f'<text x="{PAD}" y="{y}" '
                  f'font-family="{T["mono"]}" font-size="14.5" xml:space="preserve">'
                  f'{spans}</text>')
 
     y = TOP + len(rows) * LINE
-    d0 = 0.22 + len(rows) * 0.26
-    o.append(f'<text class="l" opacity="1" style="animation-delay:{d0:.2f}s" x="{PAD}" y="{y}" '
+    o.append(f'<text x="{PAD}" y="{y}" '
              f'font-family="{T["mono"]}" font-size="14.5">'
              f'<tspan fill="{T["ok"]}">martin@nightshift</tspan>'
              f'<tspan fill="{T["dim"]}">:~$ </tspan>'
