@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="386" viewBox="0 0 1200 386" role="img" aria-labelledby="t d">
+<title id="t">Last night&#39;s agent run</title>
+<desc id="d">Terminal replay of the 2026-09-23_0030 run: 7 notes read, 8 links created, 4 changes proposed for review.</desc>
+<style>.l{opacity:0;animation:in .01s linear forwards}@keyframes in{to{opacity:1}}@keyframes blink{50%{opacity:0}}.cur{animation:blink 1.05s step-end infinite}</style>
+<rect width="1200" height="386" rx="12" fill="#08090B" stroke="#252A31"/>
+<path d="M12 0h1176a12 12 0 0 1 12 12v40H0V12A12 12 0 0 1 12 0z" fill="#14171C"/>
+<line x1="0" y1="52" x2="1200" y2="52" stroke="#252A31"/>
+<circle cx="26" cy="26" r="6" fill="#FF5F57"/>
+<circle cx="46" cy="26" r="6" fill="#FEBC2E"/>
+<circle cx="66" cy="26" r="6" fill="#28C840"/>
+<text x="600.0" y="31" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12.5" fill="#8B949E">nightshift — the night of 2026-09-23</text>
+<text class="l" style="animation-delay:0.22s" x="34" y="92" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="14.5" xml:space="preserve"><tspan fill="#3FB950">martin@nightshift</tspan><tspan fill="#8B949E">:~$ </tspan><tspan fill="#F5F7FA">agent --run 2026-09-23_0030</tspan></text>
+<text class="l" style="animation-delay:0.48s" x="34" y="118" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="14.5" xml:space="preserve"><tspan fill="#4A515B">[00:30:14] </tspan><tspan fill="#8B949E">model    </tspan><tspan fill="#F5F7FA">claude-sonnet-5</tspan></text>
+<text class="l" style="animation-delay:0.74s" x="34" y="144" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="14.5" xml:space="preserve"><tspan fill="#4A515B">[00:30:14] </tspan><tspan fill="#8B949E">window   </tspan><tspan fill="#F5F7FA">since 2026-09-22</tspan></text>
+<text class="l" style="animation-delay:1.00s" x="34" y="170" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="14.5" xml:space="preserve"><tspan fill="#4A515B">[00:30:14] </tspan><tspan fill="#8B949E">read     </tspan><tspan fill="#F0883E">7</tspan><tspan fill="#F5F7FA"> new notes</tspan></text>
+<text class="l" style="animation-delay:1.26s" x="34" y="196" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="14.5" xml:space="preserve"><tspan fill="#4A515B">[00:30:14] </tspan><tspan fill="#8B949E">linked   </tspan><tspan fill="#F0883E">8</tspan><tspan fill="#F5F7FA"> links into the vault</tspan></text>
+<text class="l" style="animation-delay:1.52s" x="34" y="222" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="14.5" xml:space="preserve"><tspan fill="#4A515B">[00:30:14] </tspan><tspan fill="#8B949E">health   </tspan><tspan fill="#F5F7FA">1063 notes · 3.19 links/note · 114 orphans</tspan></text>
+<text class="l" style="animation-delay:1.78s" x="34" y="248" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="14.5" xml:space="preserve"><tspan fill="#4A515B">[00:30:14] </tspan><tspan fill="#8B949E">proposed </tspan><tspan fill="#F0883E">4</tspan><tspan fill="#F5F7FA"> changes — never applied alone</tspan></text>
+<text class="l" style="animation-delay:2.30s" x="34" y="300" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="14.5" xml:space="preserve"><tspan fill="#3FB950">NIGHTSHIFT_OK notes=7 links=8 proposals=4</tspan></text>
+<text class="l" style="animation-delay:2.56s" x="34" y="326" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="14.5" xml:space="preserve"><tspan fill="#4A515B">I read the proposals over coffee. The agent never decides.</tspan></text>
+<text class="l" style="animation-delay:2.82s" x="34" y="352" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="14.5"><tspan fill="#3FB950">martin@nightshift</tspan><tspan fill="#8B949E">:~$ </tspan><tspan class="cur" fill="#F0883E">█</tspan></text>
+</svg>

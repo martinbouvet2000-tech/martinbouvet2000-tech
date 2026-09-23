@@ -1,5 +1,9 @@
 <img src="assets/header.svg" alt="Martin Bouvet — system status: repositories, tests, CI, last ship, and the jobs that run every day" width="100%" />
 
+<img src="assets/nightly.svg" alt="Terminal replay of last night's agent run: notes read, links created, vault health, and the changes it proposed for review" width="100%" />
+
+<sub>Not a decoration: this is last night's run. My second brain is consolidated by an agent at 00:30 every day, and this terminal is redrawn from what it actually did — counters only, never the contents. <a href="scripts/build_nightly.py">The generator</a> · <a href="https://github.com/martinbouvet2000-tech/nightshift">the agent, open source</a></sub>
+
 ## I run a small factory of AI-powered products
 
 I study business at emlyon. I learned LLMs, generative and agentic AI at Oxford. Between the two, I build and ship.
@@ -73,13 +77,6 @@ My second brain feeds the loop: versioned on GitHub, indexed so agents can searc
 
 ---
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/pulse-dark.svg" />
-    <img src="assets/pulse-light.svg" alt="Languages I write and my weekly contribution pulse over the last 12 months" width="100%" />
-  </picture>
-</p>
-
-<sub>The header and this card are generated from the GitHub API by <a href="scripts/build_header.py">scripts in this repo</a> and rebuilt every morning by a GitHub Action — the profile maintains itself. <a href="scripts/build_covers.py">The project covers</a> are generated the same way.</sub>
+<sub>Nothing on this page is hand-written twice. The header is rebuilt every morning from the GitHub API by <a href="scripts/build_header.py">a script in this repo</a>, the terminal at the top is redrawn from the night agent's own counters, and <a href="scripts/build_covers.py">the project covers</a> are generated the same way. If a number here is wrong, the fix is in the code, not in the prose.</sub>
 
 **Contact** — [portfolio](https://martinbouvet2000-tech.github.io/) · [discussions](https://github.com/martinbouvet2000-tech/martinbouvet2000-tech/discussions) · [issues on nightshift](https://github.com/martinbouvet2000-tech/nightshift/issues)

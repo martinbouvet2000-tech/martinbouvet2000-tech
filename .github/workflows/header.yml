@@ -1,4 +1,4 @@
-name: profile-card
+name: header
 
 on:
   schedule:
@@ -7,7 +7,6 @@ on:
   push:
     branches: [main]
     paths:
-      - scripts/build_card.py
       - scripts/build_header.py
 
 permissions:
@@ -21,15 +20,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Build header and card
+      - name: Build header
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          python scripts/build_header.py
-          python scripts/build_card.py
+        run: python scripts/build_header.py
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/header.svg assets/pulse-*.svg
-          git diff --cached --quiet || git commit -m "chore: refresh header and card" && git push
+          git add assets/header.svg
+          git diff --cached --quiet || git commit -m "chore: refresh the header" && git push
