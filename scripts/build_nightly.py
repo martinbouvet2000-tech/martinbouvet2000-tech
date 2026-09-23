@@ -7,6 +7,7 @@ title, no vault content, ever leaves the machine.
     python scripts/build_nightly.py
 """
 import json
+from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -45,7 +46,20 @@ def lines(d):
         [(T["ok"], f'NIGHTSHIFT_OK notes={d["notes"]} links={d["links"]} '
                    f'proposals={d["proposals"]}')],
         [(T["faint"], "I read the proposals over coffee. The agent never decides.")],
-    ]
+    ] + stale(d)
+
+
+def stale(d):
+    """Say it plainly when the machine has been off for more than one night.
+
+    The agent runs on my laptop. No laptop, no run — so rather than let an old
+    night pass for last night, the terminal states its own age.
+    """
+    age = (datetime.now() - datetime.fromisoformat(d["finished_at"])).days
+    if age < 2:
+        return []
+    return [[(T["dim"], f'· no run for {age} days — laptop off. '
+                        f'This is still the last real one.')]]
 
 
 def svg(d):
