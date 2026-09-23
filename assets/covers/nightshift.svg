@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="260" viewBox="0 0 1200 260" role="img" aria-labelledby="t-nightshift d-nightshift">
-  <title id="t-nightshift">nightshift</title>
-  <desc id="d-nightshift">A second brain that works while you sleep. OPEN SOURCE - PYTHON - NODE - AGENTS</desc>
+  <title id="t-nightshift">01 — nightshift</title>
+  <desc id="d-nightshift">A second brain that works while you sleep. STATUS OPEN SOURCE. TESTS 89. CI LINUX + WINDOWS. RUNS NIGHTLY · 00:30.</desc>
   <defs>
     <pattern id="g-nightshift" width="40" height="40" patternUnits="userSpaceOnUse">
       <path d="M40 0H0V40" fill="none" stroke="#252A31" stroke-width="1" stroke-opacity=".55"/>
@@ -9,9 +9,10 @@
   <rect width="1200" height="260" rx="14" fill="#0B0D10"/>
   <rect width="1200" height="260" rx="14" fill="url(#g-nightshift)"/>
   <rect x="0" y="0" width="4" height="260" rx="2" fill="#F0883E"/>
-  <text x="64" y="88" font-family="-apple-system,'Segoe UI',Inter,Helvetica,Arial,sans-serif" font-size="46" font-weight="700" fill="#F5F7FA" letter-spacing="-0.5">nightshift</text>
-  <text x="64" y="132" font-family="-apple-system,'Segoe UI',Inter,Helvetica,Arial,sans-serif" font-size="21" fill="#8B949E">A second brain that works while you sleep.</text>
-  <line x1="64" y1="168" x2="164" y2="168" stroke="#F0883E" stroke-width="2"/>
-  <text x="64" y="200" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing="1.6">OPEN SOURCE · PYTHON · NODE · AGENTS</text>
+  <text x="64" y="54" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="12" fill="#F0883E" letter-spacing="2.6">01 / AI SYSTEM</text>
+  <text x="64" y="106" font-family="-apple-system,'Segoe UI',Inter,Helvetica,Arial,sans-serif" font-size="42" font-weight="700" fill="#F5F7FA" letter-spacing="-0.5">nightshift</text>
+  <text x="64" y="142" font-family="-apple-system,'Segoe UI',Inter,Helvetica,Arial,sans-serif" font-size="20" fill="#8B949E">A second brain that works while you sleep.</text>
+  <line x1="64" y1="168" x2="760" y2="168" stroke="#252A31"/>
+  <text x="64" y="196" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" fill="#8B949E" letter-spacing="1.8">STATUS</text><circle cx="68" cy="214" r="3.5" fill="#F0883E"/><text x="78" y="219" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="14" fill="#F5F7FA">OPEN SOURCE</text><text x="242" y="196" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" fill="#8B949E" letter-spacing="1.8">TESTS</text><text x="242" y="219" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="14" fill="#F5F7FA">89</text><text x="420" y="196" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" fill="#8B949E" letter-spacing="1.8">CI</text><text x="420" y="219" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="14" fill="#F5F7FA">LINUX + WINDOWS</text><text x="598" y="196" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" fill="#8B949E" letter-spacing="1.8">RUNS</text><text x="598" y="219" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="14" fill="#F5F7FA">NIGHTLY · 00:30</text>
   <g transform="translate(1000,130)"><path d="M0 -84 A84 84 0 0 1 59 59" fill="none" stroke="#F5F7FA" stroke-opacity=".06" stroke-width="26"/><circle r="84" fill="none" stroke="#252A31"/><line x1="0.0" y1="-84.0" x2="0.0" y2="-93.0" stroke="#8B949E"/><text x="0.0" y="-104.0" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" fill="#8B949E">00</text><line x1="84.0" y1="0.0" x2="93.0" y2="0.0" stroke="#8B949E"/><text x="108.0" y="4.0" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" fill="#8B949E">06</text><line x1="0.0" y1="84.0" x2="0.0" y2="93.0" stroke="#8B949E"/><text x="0.0" y="112.0" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" fill="#8B949E">12</text><line x1="-84.0" y1="0.0" x2="-93.0" y2="0.0" stroke="#8B949E"/><text x="-108.0" y="4.0" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="10" fill="#8B949E">18</text><circle cx="-6" cy="-70" r="4" fill="#F0883E"/><circle cx="52" cy="-50" r="4" fill="#F0883E"/><circle cx="70" cy="8" r="4" fill="#F0883E"/><circle cx="-70" cy="6" r="4" fill="#F0883E"/><line x1="0" y1="0" x2="-42" y2="-42" stroke="#F5F7FA" stroke-width="2" stroke-linecap="round"/><circle r="3" fill="#F5F7FA"/></g>
 </svg>

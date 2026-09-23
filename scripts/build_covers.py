@@ -82,20 +82,42 @@ def cortex_glyph() -> str:
 
 
 PROJECTS = [
-    {"slug": "nightshift", "name": "nightshift", "tagline": "A second brain that works while you sleep.",
-     "meta": "OPEN SOURCE · PYTHON · NODE · AGENTS", "glyph": night_glyph},
-    {"slug": "nous-deux", "name": "Nous Deux", "tagline": "Warm product, paranoid backend.",
-     "meta": "OPEN SOURCE · REACT · TYPESCRIPT · SUPABASE", "glyph": couple_glyph},
-    {"slug": "cortex", "name": "Cortex", "tagline": "Course handout in, study system out.",
-     "meta": "PRODUCT · NEXT.JS · CLAUDE · STRIPE", "glyph": cortex_glyph},
+    {"slug": "nightshift", "index": "01", "kind": "AI SYSTEM", "name": "nightshift",
+     "tagline": "A second brain that works while you sleep.", "glyph": night_glyph,
+     "readouts": [("STATUS", "OPEN SOURCE", True), ("TESTS", "89", False),
+                  ("CI", "LINUX + WINDOWS", False), ("RUNS", "NIGHTLY · 00:30", False)]},
+    {"slug": "nous-deux", "index": "02", "kind": "PRODUCT", "name": "Nous Deux",
+     "tagline": "Warm product, paranoid backend.", "glyph": couple_glyph,
+     "readouts": [("STATUS", "LIVE", True), ("TESTS", "374", False),
+                  ("MIGRATIONS", "24", False), ("SIGN-UPS", "CAPPED AT 2", False)]},
+    {"slug": "cortex", "index": "03", "kind": "PRODUCT", "name": "Cortex",
+     "tagline": "Course handout in, study system out.", "glyph": cortex_glyph,
+     "readouts": [("STATUS", "LIVE · DEMO MODE", True), ("TESTS", "33", False),
+                  ("BILLING", "STRIPE", False), ("CODE", "PRIVATE", False)]},
 ]
+
+
+def readouts(p) -> str:
+    """The instrument row: four values you can check against the repo."""
+    out = []
+    for i, (label, value, live) in enumerate(p["readouts"]):
+        x = 64 + i * 178
+        out.append(f'<text x="{x}" y="196" font-family="{T["mono"]}" font-size="10" '
+                   f'fill="{T["muted"]}" letter-spacing="1.8">{label}</text>')
+        vx = x + (14 if live else 0)
+        if live:
+            out.append(f'<circle cx="{x + 4}" cy="{214}" r="3.5" fill="{T["accent"]}"/>')
+        out.append(f'<text x="{vx}" y="219" font-family="{T["mono"]}" font-size="14" '
+                   f'fill="{T["text"]}">{value}</text>')
+    return "".join(out)
 
 
 def cover(p) -> str:
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" \
 role="img" aria-labelledby="t-{p['slug']} d-{p['slug']}">
-  <title id="t-{p['slug']}">{p['name']}</title>
-  <desc id="d-{p['slug']}">{p['tagline']} {p['meta'].replace('·', '-')}</desc>
+  <title id="t-{p['slug']}">{p['index']} — {p['name']}</title>
+  <desc id="d-{p['slug']}">{p['tagline']} \
+{' '.join(f'{k} {v}.' for k, v, _ in p['readouts'])}</desc>
   <defs>
     <pattern id="g-{p['slug']}" width="40" height="40" patternUnits="userSpaceOnUse">
       <path d="M40 0H0V40" fill="none" stroke="{T['border']}" stroke-width="1" stroke-opacity=".55"/>
@@ -104,12 +126,13 @@ role="img" aria-labelledby="t-{p['slug']} d-{p['slug']}">
   <rect width="{W}" height="{H}" rx="14" fill="{T['bg']}"/>
   <rect width="{W}" height="{H}" rx="14" fill="url(#g-{p['slug']})"/>
   <rect x="0" y="0" width="4" height="{H}" rx="2" fill="{T['accent']}"/>
-  <text x="64" y="88" font-family="{T['sans']}" font-size="46" font-weight="700" \
+  <text x="64" y="54" font-family="{T['mono']}" font-size="12" fill="{T['accent']}" \
+letter-spacing="2.6">{p['index']} / {p['kind']}</text>
+  <text x="64" y="106" font-family="{T['sans']}" font-size="42" font-weight="700" \
 fill="{T['text']}" letter-spacing="-0.5">{p['name']}</text>
-  <text x="64" y="132" font-family="{T['sans']}" font-size="21" fill="{T['muted']}">{p['tagline']}</text>
-  <line x1="64" y1="168" x2="164" y2="168" stroke="{T['accent']}" stroke-width="2"/>
-  <text x="64" y="200" font-family="{T['mono']}" font-size="12" fill="{T['muted']}" \
-letter-spacing="1.6">{p['meta']}</text>
+  <text x="64" y="142" font-family="{T['sans']}" font-size="20" fill="{T['muted']}">{p['tagline']}</text>
+  <line x1="64" y1="168" x2="760" y2="168" stroke="{T['border']}"/>
+  {readouts(p)}
   {p['glyph']()}
 </svg>
 """

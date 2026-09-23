@@ -1,46 +1,46 @@
-<img src="assets/header.svg" alt="Martin Bouvet — Builder × Business × AI" width="100%" />
+<img src="assets/header.svg" alt="Martin Bouvet — system status: repositories, tests, CI, last ship, and the jobs that run every day" width="100%" />
 
-## Business student who ships AI-powered products
+## I run a small factory of AI-powered products
 
-I study at emlyon and I build. I learned LLMs, generative and agentic AI at Oxford, and I work with AI agents the way a founder works with a small team: I own the problem, the product decisions and the trade-offs, and the agents compress the distance between a decision and a shipped feature.
+I study business at emlyon. I learned LLMs, generative and agentic AI at Oxford. Between the two, I build and ship.
 
-Still a student — and already shipping seriously. That order matters.
+I work with AI agents the way a founder works with a small team: I own the problem, the product decisions and the trade-offs; the agents compress the distance between a decision and a shipped feature. Everything above runs on a schedule, and everything below is a repository you can open.
 
 **[Portfolio: five case studies →](https://martinbouvet2000-tech.github.io/)**
 
 ---
 
-## Selected work
+## Systems
 
-<a href="https://github.com/martinbouvet2000-tech/nightshift"><img src="assets/covers/nightshift.svg" alt="nightshift — a second brain that works while you sleep" width="100%" /></a>
+<a href="https://github.com/martinbouvet2000-tech/nightshift"><img src="assets/covers/nightshift.svg" alt="01 — nightshift: a second brain that works while you sleep" width="100%" /></a>
 
 **The problem.** I saved hundreds of videos and remembered almost none of them. Saving is not learning.  
 **What I built.** A pipeline that turns saved videos into scored Markdown notes, and a Claude Code agent that consolidates the vault overnight inside hard limits: a time window, a lock, a timeout, one retry, and a proof line it must print before the run counts as done. Its file access never leaves the vault, because a transcript from the internet is untrusted input.  
-**Proof.** 89 tests · CI on Linux and Windows · a demo that runs offline, with no API key, in under a minute.
+**Check it yourself.** 89 tests · CI on Linux and Windows · a demo that runs offline, with no API key, in under a minute.
 
 [Repository](https://github.com/martinbouvet2000-tech/nightshift) · [Case study](https://martinbouvet2000-tech.github.io/work/ai-os.html)
 
-<a href="https://github.com/martinbouvet2000-tech/nous-deux"><img src="assets/covers/nous-deux.svg" alt="Nous Deux — warm product, paranoid backend" width="100%" /></a>
+<a href="https://github.com/martinbouvet2000-tech/nous-deux"><img src="assets/covers/nous-deux.svg" alt="02 — Nous Deux: warm product, paranoid backend" width="100%" /></a>
 
 **The problem.** Two people living apart juggle time zones, two timetables and a dozen apps to share small daily moments — with data as private as data gets.  
 **What I built.** One shared space: dual clocks, an opt-in live map with 48-hour retention, a calendar that imports a whole school timetable from a PDF, and time capsules the database keeps sealed until their date. Notifications say *who* did something, never *what*.  
-**Proof.** Security lives in row-level policies, not in the client: 24 migrations, sign-ups capped at two accounts, 374 test cases, CI on every push.
+**Check it yourself.** Security lives in row-level policies, not in the client: 24 migrations, sign-ups capped at two accounts, 374 test cases, CI on every push.
 
 [Repository](https://github.com/martinbouvet2000-tech/nous-deux) · [Live app](https://martinbouvet2000-tech.github.io/nous-deux/) · [Case study](https://martinbouvet2000-tech.github.io/work/nous-deux.html)
 
-<a href="https://martinbouvet2000-tech.github.io/work/cortex.html"><img src="assets/covers/cortex.svg" alt="Cortex — course handout in, study system out" width="100%" /></a>
+<a href="https://martinbouvet2000-tech.github.io/work/cortex.html"><img src="assets/covers/cortex.svg" alt="03 — Cortex: course handout in, study system out" width="100%" /></a>
 
 **The problem.** First-year medicine and law students rewrite their handouts by hand, then revise without structure. Flashcard apps don't know their course; chatbots answer from the whole internet.  
 **What I built.** Drop in a PDF, get a study sheet, ten questions, a spaced-repetition plan and a tutor that answers only from that course. Freemium with Stripe, and an admin panel that runs the public site from a phone.  
-**Proof.** Live in production in demo mode, 33 tests, and a security pass: rate limits, CSRF checks, per-user data scoping, server-side grading. The code is private.
+**Check it yourself.** Live in production in demo mode, 33 tests, and a security pass: rate limits, CSRF checks, per-user data scoping, server-side grading. The code is private.
 
 [Live site](https://cortex-revisions.vercel.app) · [Case study](https://martinbouvet2000-tech.github.io/work/cortex.html)
 
-<sub>Also built: <a href="https://github.com/martinbouvet2000-tech/business-idea-radar">Business Idea Radar</a> · <a href="https://martinbouvet2000-tech.github.io/Diabete/">Diavie</a> · <a href="https://martinbouvet2000-tech.github.io/code-examen/">Code Examen</a> · <a href="https://martinbouvet2000-tech.github.io/aurelia-masque/">Aurélia</a></sub>
+<sub>Also running: <a href="https://github.com/martinbouvet2000-tech/business-idea-radar">Business Idea Radar</a> · <a href="https://martinbouvet2000-tech.github.io/Diabete/">Diavie</a> · <a href="https://martinbouvet2000-tech.github.io/code-examen/">Code Examen</a> · <a href="https://martinbouvet2000-tech.github.io/aurelia-masque/">Aurélia</a></sub>
 
 ---
 
-## How I build
+## Operating model
 
 ```text
    me                          agents                        me
@@ -51,9 +51,9 @@ Still a student — and already shipping seriously. That order matters.
               (00:30, every day, inside hard limits)
 ```
 
-I own the decisions: what the problem is, who it is for, what gets cut, what "done" means. Agents own execution speed. Every run ends with a verification pass, and nothing ships on trust alone — that is why the numbers above are test counts, not adjectives.
+I decide what the problem is, who it is for, what gets cut and what "done" means. Agents own execution speed. Every run ends with a verification pass, and nothing ships on trust alone — that is why the readouts above are test counts, not adjectives.
 
-My second brain feeds the loop: it is versioned on GitHub, indexed so agents can search it, and consolidated every night. The reusable core is open source as [nightshift](https://github.com/martinbouvet2000-tech/nightshift).
+My second brain feeds the loop: versioned on GitHub, indexed so agents can search it, consolidated every night. The reusable core is open source as [nightshift](https://github.com/martinbouvet2000-tech/nightshift).
 
 ---
 
@@ -80,6 +80,6 @@ My second brain feeds the loop: it is versioned on GitHub, indexed so agents can
   </picture>
 </p>
 
-<sub>This card is generated from the GitHub API by <a href="scripts/build_card.py">a script in this repo</a> and rebuilt every morning by a GitHub Action — the profile maintains itself. <a href="scripts/build_covers.py">The project covers</a> are generated the same way.</sub>
+<sub>The header and this card are generated from the GitHub API by <a href="scripts/build_header.py">scripts in this repo</a> and rebuilt every morning by a GitHub Action — the profile maintains itself. <a href="scripts/build_covers.py">The project covers</a> are generated the same way.</sub>
 
 **Contact** — [portfolio](https://martinbouvet2000-tech.github.io/) · [discussions](https://github.com/martinbouvet2000-tech/martinbouvet2000-tech/discussions) · [issues on nightshift](https://github.com/martinbouvet2000-tech/nightshift/issues)
