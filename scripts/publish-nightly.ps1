@@ -23,9 +23,16 @@ if ($LASTEXITCODE -ne 0) { Write-Error "commit failed"; exit 1 }
 # --autostash: the daily Action commits here too, and this repo often has
 # unstaged edits of mine. Without it the rebase refuses to start.
 git pull --rebase --autostash --quiet
-if ($LASTEXITCODE -ne 0) { Write-Error "pull failed — nothing pushed, will retry tomorrow"; exit 1 }
+if ($LASTEXITCODE -ne 0) { Write-Error "pull failed - nothing pushed, will retry tomorrow"; exit 1 }
 
-git push --quiet
-if ($LASTEXITCODE -ne 0) { Write-Error "push failed — commit kept locally"; exit 1 }
+$pushOut = git push 2>&1 | Out-String
+if ($LASTEXITCODE -ne 0) { Write-Error "push failed - commit kept locally: $pushOut"; exit 1 }
+
+# A zero exit code is not proof: on 2026-09-24 the push reported success from
+# the scheduled task yet GitHub never got the commit. Ask the remote itself.
+$remoteHead = (git ls-remote origin refs/heads/main) -split "\s+" | Select-Object -First 1
+if ($remoteHead -ne (git rev-parse HEAD)) {
+    Write-Error "push failed - remote still at $remoteHead, commit kept locally: $pushOut"; exit 1
+}
 
 Write-Host "published the night of $((Get-Content assets/last-run.json | ConvertFrom-Json).night)"
