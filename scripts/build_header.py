@@ -1,7 +1,7 @@
 """Build the control-room header from live GitHub data.
 
 Every value on the header is fetched or declared here — nothing is invented.
-Rebuilt every morning by .github/workflows/profile-card.yml.
+Rebuilt every morning by .github/workflows/header.yml.
 
     GITHUB_TOKEN=$(gh auth token) python scripts/build_header.py
 """
@@ -26,7 +26,7 @@ JOBS = [
 ]
 
 # Test counts, read from each repo's suite. Update when a suite grows.
-TESTS = {"nightshift": 109, "nous-deux": 374, "business-idea-radar": 60}
+TESTS = {"nightshift": 115, "nous-deux": 430, "business-idea-radar": 60}
 
 T = {
     "bg": "#08090B", "panel": "#101317", "line": "#232830",
@@ -191,8 +191,8 @@ def svg(s):
     o.append(f'<g class="scan"><line x1="{sx}" y1="{sy - 16}" x2="{sx}" y2="{sy + 12}" '
              f'stroke="{T["accent"]}" stroke-opacity=".5"/></g>')
     o.append(f'<text x="{sx + sw}" y="{sy - 70}" text-anchor="end" font-family="{T["mono"]}" '
-             f'font-size="10.5" fill="{T["faint"]}">rebuilt {s["built"]} · every value here comes from '
-             f'the GitHub API</text>')
+             f'font-size="10.5" fill="{T["faint"]}">rebuilt {s["built"]} · from the GitHub API, '
+             f'except the test counts, which come from each suite</text>')
     o.append("</svg>")
     return "\n".join(o)
 

@@ -20,7 +20,7 @@ I work with AI agents the way a founder works with a small team: I own the probl
 
 **The problem.** I saved hundreds of videos and remembered almost none of them. Saving is not learning.  
 **What I built.** A pipeline that turns saved videos into scored Markdown notes, and a Claude Code agent that consolidates the vault overnight inside hard limits: a time window, a lock, a timeout, one retry, and a proof line it must print before the run counts as done. Its file access never leaves the vault, because a transcript from the internet is untrusted input.  
-**Check it yourself.** 109 tests · CI on Linux, Windows and in Docker · a demo that runs offline, with no API key, in under a minute — including inside the container, against a mounted volume.
+**Check it yourself.** 115 tests · CI on Linux, Windows and in Docker · a demo that runs offline, with no API key, in under a minute — including inside the container, against a mounted volume.
 
 [Repository](https://github.com/martinbouvet2000-tech/nightshift) · [Case study](https://martinbouvet2000-tech.github.io/work/ai-os.html)
 
@@ -28,7 +28,7 @@ I work with AI agents the way a founder works with a small team: I own the probl
 
 **The problem.** Two people living apart juggle time zones, two timetables and a dozen apps to share small daily moments — with data as private as data gets.  
 **What I built.** One shared space: dual clocks, an opt-in live map with 48-hour retention, a calendar that imports a whole school timetable from a PDF, and time capsules the database keeps sealed until their date. Notifications say *who* did something, never *what*.  
-**Check it yourself.** Security lives in row-level policies, not in the client: 24 migrations, sign-ups capped at two accounts, 374 test cases, CI on every push.
+**Check it yourself.** Security lives in row-level policies, not in the client: 24 migrations, sign-ups capped at two accounts, 430 test cases, CI on every push.
 
 [Repository](https://github.com/martinbouvet2000-tech/nous-deux) · [Live app](https://martinbouvet2000-tech.github.io/nous-deux/) · [Case study](https://martinbouvet2000-tech.github.io/work/nous-deux.html)
 

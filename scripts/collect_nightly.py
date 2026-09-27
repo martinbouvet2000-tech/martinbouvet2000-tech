@@ -2,7 +2,7 @@
 
 Runs locally after the night agent, because the agent's state never leaves this
 computer. It copies counters only — integers and one model name. The journal is
-read with a strict regex that captures four numbers from the health line; no
+read with a strict regex that captures three numbers from the health line; no
 sentence, title or link from the vault is ever read out of it.
 
     python scripts/collect_nightly.py

@@ -84,11 +84,11 @@ def cortex_glyph() -> str:
 PROJECTS = [
     {"slug": "nightshift", "index": "01", "kind": "AI SYSTEM", "name": "nightshift",
      "tagline": "A second brain that works while you sleep.", "glyph": night_glyph,
-     "readouts": [("STATUS", "OPEN SOURCE", True), ("TESTS", "109", False),
+     "readouts": [("STATUS", "OPEN SOURCE", True), ("TESTS", "115", False),
                   ("CI", "LINUX · WIN · DOCKER", False), ("RUNS", "NIGHTLY · 00:30", False)]},
     {"slug": "nous-deux", "index": "02", "kind": "PRODUCT", "name": "Nous Deux",
      "tagline": "Warm product, paranoid backend.", "glyph": couple_glyph,
-     "readouts": [("STATUS", "LIVE", True), ("TESTS", "374", False),
+     "readouts": [("STATUS", "LIVE", True), ("TESTS", "430", False),
                   ("MIGRATIONS", "24", False), ("SIGN-UPS", "CAPPED AT 2", False)]},
     {"slug": "cortex", "index": "03", "kind": "PRODUCT", "name": "Cortex",
      "tagline": "Course handout in, study system out.", "glyph": cortex_glyph,
