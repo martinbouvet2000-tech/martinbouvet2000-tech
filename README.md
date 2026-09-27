@@ -22,7 +22,7 @@ I work with AI agents the way a founder works with a small team: I own the probl
 **What I built.** A pipeline that turns saved videos into scored Markdown notes, and a Claude Code agent that consolidates the vault overnight inside hard limits: a time window, a lock, a timeout, one retry, and a proof line it must print before the run counts as done. Its file access never leaves the vault, because a transcript from the internet is untrusted input.  
 **Check it yourself.** 115 tests · 3 CI targets: Linux, Windows, Docker · a demo that runs offline, with no API key, in under a minute — including inside the container, against a mounted volume.
 
-[Repository](https://github.com/martinbouvet2000-tech/nightshift) · [Case study](https://martinbouvet2000-tech.github.io/work/ai-os.html)
+[Repository](https://github.com/martinbouvet2000-tech/nightshift) · [Case study](https://martinbouvet2000-tech.github.io/work/ai-os.html) · [37 nights: what it cost me to host this on a laptop](https://github.com/martinbouvet2000-tech/nightshift/blob/main/docs/37-nights.md)
 
 <a href="https://github.com/martinbouvet2000-tech/nous-deux"><img src="assets/covers/nous-deux.svg" alt="02 — Nous Deux: warm product, paranoid backend" width="100%" /></a>
 
