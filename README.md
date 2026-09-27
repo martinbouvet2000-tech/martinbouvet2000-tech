@@ -20,7 +20,7 @@ I work with AI agents the way a founder works with a small team: I own the probl
 
 **The problem.** I saved hundreds of videos and remembered almost none of them. Saving is not learning.  
 **What I built.** A pipeline that turns saved videos into scored Markdown notes, and a Claude Code agent that consolidates the vault overnight inside hard limits: a time window, a lock, a timeout, one retry, and a proof line it must print before the run counts as done. Its file access never leaves the vault, because a transcript from the internet is untrusted input.  
-**Check it yourself.** 89 tests · CI on Linux and Windows · a demo that runs offline, with no API key, in under a minute.
+**Check it yourself.** 109 tests · CI on Linux, Windows and in Docker · a demo that runs offline, with no API key, in under a minute — including inside the container, against a mounted volume.
 
 [Repository](https://github.com/martinbouvet2000-tech/nightshift) · [Case study](https://martinbouvet2000-tech.github.io/work/ai-os.html)
 
@@ -58,6 +58,8 @@ I work with AI agents the way a founder works with a small team: I own the probl
 I decide what the problem is, who it is for, what gets cut and what "done" means. Agents own execution speed. Every run ends with a verification pass, and nothing ships on trust alone — that is why the readouts above are test counts, not adjectives.
 
 My second brain feeds the loop: versioned on GitHub, indexed so agents can search it, consolidated every night. The reusable core is open source as [nightshift](https://github.com/martinbouvet2000-tech/nightshift).
+
+**What keeps it running.** Five jobs on a daily schedule, a runner with a lock, a timeout, one retry and a proof line the run must print before it counts as done, and a failure that writes itself into my journal instead of passing silently. The pipeline ships as a container with a scheduler inside it, because a box with no cron still needs one and a restart policy is not a schedule. The header above is not a badge: it is that system reporting on itself every morning.
 
 ---
 

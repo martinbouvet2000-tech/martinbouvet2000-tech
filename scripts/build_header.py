@@ -26,7 +26,7 @@ JOBS = [
 ]
 
 # Test counts, read from each repo's suite. Update when a suite grows.
-TESTS = {"nightshift": 89, "nous-deux": 374, "business-idea-radar": 60}
+TESTS = {"nightshift": 109, "nous-deux": 374, "business-idea-radar": 60}
 
 T = {
     "bg": "#08090B", "panel": "#101317", "line": "#232830",
