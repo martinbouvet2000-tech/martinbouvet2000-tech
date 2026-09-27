@@ -25,7 +25,11 @@ if ($LASTEXITCODE -ne 0) { Write-Error "commit failed"; exit 1 }
 git pull --rebase --autostash --quiet
 if ($LASTEXITCODE -ne 0) { Write-Error "pull failed - nothing pushed, will retry tomorrow"; exit 1 }
 
+# PowerShell 5.1 turns git's normal stderr ("To https://...") into a terminating
+# error under "Stop": relax it for the push, the ls-remote check below decides.
+$ErrorActionPreference = "Continue"
 $pushOut = git push 2>&1 | Out-String
+$ErrorActionPreference = "Stop"
 if ($LASTEXITCODE -ne 0) { Write-Error "push failed - commit kept locally: $pushOut"; exit 1 }
 
 # A zero exit code is not proof: on 2026-09-24 the push reported success from
