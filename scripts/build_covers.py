@@ -85,7 +85,7 @@ PROJECTS = [
     {"slug": "nightshift", "index": "01", "kind": "AI SYSTEM", "name": "nightshift",
      "tagline": "A second brain that works while you sleep.", "glyph": night_glyph,
      "readouts": [("STATUS", "OPEN SOURCE", True), ("TESTS", "109", False),
-                  ("CI", "LINUX + WINDOWS + DOCKER", False), ("RUNS", "NIGHTLY · 00:30", False)]},
+                  ("CI", "LINUX · WIN · DOCKER", False), ("RUNS", "NIGHTLY · 00:30", False)]},
     {"slug": "nous-deux", "index": "02", "kind": "PRODUCT", "name": "Nous Deux",
      "tagline": "Warm product, paranoid backend.", "glyph": couple_glyph,
      "readouts": [("STATUS", "LIVE", True), ("TESTS", "374", False),
