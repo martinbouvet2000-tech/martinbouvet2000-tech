@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="386" viewBox="0 0 1200 386" role="img" aria-labelledby="t d">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="412" viewBox="0 0 1200 412" role="img" aria-labelledby="t d">
 <title id="t">Last night&#39;s agent run</title>
 <desc id="d">Terminal replay of the 2026-09-26_0302 run: 8 notes read, 0 links created, 6 changes proposed for review.</desc>
 <style>@keyframes blink{50%{opacity:0}}.cur{animation:blink 1.05s step-end infinite}</style>
-<rect width="1200" height="386" rx="12" fill="#08090B" stroke="#252A31"/>
+<rect width="1200" height="412" rx="12" fill="#08090B" stroke="#252A31"/>
 <path d="M12 0h1176a12 12 0 0 1 12 12v40H0V12A12 12 0 0 1 12 0z" fill="#14171C"/>
 <line x1="0" y1="52" x2="1200" y2="52" stroke="#252A31"/>
 <circle cx="26" cy="26" r="6" fill="#FF5F57"/>
@@ -18,5 +18,6 @@
 <text x="34" y="248" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="14.5" xml:space="preserve"><tspan fill="#4A515B">[03:02:51] </tspan><tspan fill="#8B949E">proposed </tspan><tspan fill="#F0883E">6</tspan><tspan fill="#F5F7FA"> changes — never applied alone</tspan></text>
 <text x="34" y="300" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="14.5" xml:space="preserve"><tspan fill="#3FB950">NIGHTSHIFT_OK notes=8 links=0 proposals=6</tspan></text>
 <text x="34" y="326" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="14.5" xml:space="preserve"><tspan fill="#4A515B">I read the proposals over coffee. The agent never decides.</tspan></text>
-<text x="34" y="352" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="14.5"><tspan fill="#3FB950">martin@nightshift</tspan><tspan fill="#8B949E">:~$ </tspan><tspan class="cur" fill="#F0883E">█</tspan></text>
+<text x="34" y="352" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="14.5" xml:space="preserve"><tspan fill="#8B949E">· no run for 2 days — laptop off. This is still the last real one.</tspan></text>
+<text x="34" y="378" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="14.5"><tspan fill="#3FB950">martin@nightshift</tspan><tspan fill="#8B949E">:~$ </tspan><tspan class="cur" fill="#F0883E">█</tspan></text>
 </svg>
