@@ -1,13 +1,13 @@
 {
-  "run_id": "2026-09-26_0302",
-  "night": "2026-09-26",
-  "finished_at": "2026-09-26T03:02:51",
+  "run_id": "2026-10-10_0030",
+  "night": "2026-10-10",
+  "finished_at": "2026-10-10T00:30:15",
   "model": "claude-sonnet-5",
-  "since": "2026-09-25",
-  "notes": 8,
+  "since": "2026-10-09",
+  "notes": 13,
   "links": 0,
-  "proposals": 6,
-  "vault_notes": "1081",
-  "orphans": "123",
-  "links_per_note": "3.3"
+  "proposals": 7,
+  "vault_notes": "1220",
+  "orphans": "165",
+  "links_per_note": "3.45"
 }
