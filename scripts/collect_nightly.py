@@ -17,9 +17,11 @@ STATE = Path(os.environ.get(
     "NIGHTLY_STATE", Path.home() / ".claude/scheduled-tasks/nightly-agent/state.json"))
 VAULT = Path(os.environ.get("OBSIDIAN_VAULT_PATH", Path.home() / "Documents/Vault Principal"))
 
+# Bold is optional: the agent writes "**1220** notes" or "1220 notes (=)".
 HEALTH = re.compile(
-    r"Sant[ée]\s*:\s*\*\*(\d+)\*\*\s*notes.*?\*\*(\d+)\*\*\s*orphelines.*?"
-    r"\*\*([\d.,]+)\*\*\s*liens/note", re.S)
+    r"Sant[ée]\s*:\s*(?:\*\*)?(\d+)(?:\*\*)?\s*notes[^\n]*?"
+    r"(?:\*\*)?(\d+)(?:\*\*)?\s*orphelines[^\n]*?"
+    r"(?:\*\*)?(\d+(?:[.,]\d+)?)(?:\*\*)?\s*liens/note")
 
 
 def health(journal_date):
