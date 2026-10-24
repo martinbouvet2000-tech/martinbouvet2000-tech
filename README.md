@@ -16,13 +16,18 @@ I work with AI agents the way a founder works with a small team: I own the probl
 
 ## Systems
 
+### The main project: nightshift
+
 <a href="https://github.com/martinbouvet2000-tech/nightshift"><img src="assets/covers/nightshift.svg" alt="01 — nightshift: a second brain that works while you sleep" width="100%" /></a>
 
 **The problem.** I saved hundreds of videos and remembered almost none of them. Saving is not learning.  
 **What I built.** A pipeline that turns saved videos into scored Markdown notes, and a Claude Code agent that consolidates the vault overnight inside hard limits: a time window, a lock, a timeout, one retry, and a proof line it must print before the run counts as done. Its file access never leaves the vault, because a transcript from the internet is untrusted input.  
-**Check it yourself.** 115 tests · 3 CI targets: Linux, Windows, Docker · a demo that runs offline, with no API key, in under a minute — including inside the container, against a mounted volume.
+**Check it yourself.** 120 tests · 3 CI targets: Linux, Windows, Docker · a demo that runs offline, with no API key, in under a minute — including inside the container, against a mounted volume.  
+**New in [v0.2.0](https://github.com/martinbouvet2000-tech/nightshift/releases/tag/v0.2.0).** The runner keeps the machine awake while it works and writes a missed night into the journal, because a night that never ran logs nothing. Every captured note now gets an index note linking to it, so none stays an orphan. And the 37-nights paper has its answer: on battery, the laptop's power plan switches off the wake timer the scheduler relies on.
 
-[Repository](https://github.com/martinbouvet2000-tech/nightshift) · [Case study](https://martinbouvet2000-tech.github.io/work/ai-os.html) · [37 nights: what it cost me to host this on a laptop](https://github.com/martinbouvet2000-tech/nightshift/blob/main/docs/37-nights.md)
+[Repository](https://github.com/martinbouvet2000-tech/nightshift) · [Release notes](https://github.com/martinbouvet2000-tech/nightshift/releases/tag/v0.2.0) · [Case study](https://martinbouvet2000-tech.github.io/work/ai-os.html) · [37 nights: what it cost me to host this on a laptop](https://github.com/martinbouvet2000-tech/nightshift/blob/main/docs/37-nights.md)
+
+### Also shipped
 
 <a href="https://github.com/martinbouvet2000-tech/nous-deux"><img src="assets/covers/nous-deux.svg" alt="02 — Nous Deux: warm product, paranoid backend" width="100%" /></a>
 
@@ -73,8 +78,8 @@ My second brain feeds the loop: versioned on GitHub, indexed so agents can searc
 
 ## Currently building
 
-**nightshift v0.2** — more capture sources, and real-run coverage for the night agent.  
-**E-invoicing audit** — a fixed-price readiness audit for small businesses, before France's September 2026 deadline.  
+**nightshift v0.3** — more capture sources, and real-run coverage for the night agent. v0.2.0 is out.  
+**E-invoicing audit** — a fixed-price readiness audit for small French businesses: receiving e-invoices has been mandatory since September 2026, issuing them follows in September 2027.  
 **Cortex** — a first student cohort, then switching real generation on.
 
 ---
