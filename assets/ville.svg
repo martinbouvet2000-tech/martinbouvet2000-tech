@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="660" viewBox="0 0 1200 660" role="img" aria-labelledby="t d">
 <title id="t">The agent city, one day</title>
-<desc id="d">Isometric map of 14 AI agents on duty on 2026-11-03: 111 wake-ups, 105 done, 2 errors. A building per agent, lit windows where the agent worked that day. Counters only.</desc>
+<desc id="d">Isometric map of 14 AI agents on duty on 2026-11-03: 126 wake-ups, 120 done, 2 errors. A building per agent, lit windows where the agent worked that day. Counters only.</desc>
 <defs><radialGradient id="g"><stop offset="0" stop-color="#F0883E" stop-opacity=".30"/><stop offset="1" stop-color="#F0883E" stop-opacity="0"/></radialGradient><clipPath id="isl"><polygon points="584.8,438.7 572.7,445.7 560.5,452.7 548.0,459.9 535.1,467.1 521.7,474.4 507.5,481.8 492.3,489.0 476.1,495.9 458.6,502.1 439.9,507.1 420.2,510.3 400.0,511.4 379.8,510.3 360.1,507.1 341.4,502.1 323.9,495.9 307.7,489.0 292.5,481.8 278.3,474.4 264.9,467.1 252.0,459.9 239.5,452.7 227.3,445.7 215.2,438.7 203.1,431.7 190.9,424.6 178.5,417.4 166.0,410.0 153.3,402.2 140.5,394.1 128.0,385.3 116.1,375.9 105.4,365.8 96.8,355.0 91.2,343.7 89.2,332.0 91.2,320.3 96.8,309.0 105.4,298.2 116.1,288.1 128.0,278.7 140.5,269.9 153.3,261.8 166.0,254.0 178.5,246.6 190.9,239.4 203.1,232.3 215.2,225.3 227.3,218.3 239.5,211.3 252.0,204.1 264.9,196.9 278.3,189.6 292.5,182.2 307.7,175.0 323.9,168.1 341.4,161.9 360.1,156.9 379.8,153.7 400.0,152.6 420.2,153.7 439.9,156.9 458.6,161.9 476.1,168.1 492.3,175.0 507.5,182.2 521.7,189.6 535.1,196.9 548.0,204.1 560.5,211.3 572.7,218.3 584.8,225.3 596.9,232.3 609.1,239.4 621.5,246.6 634.0,254.0 646.7,261.8 659.5,269.9 672.0,278.7 683.9,288.1 694.6,298.2 703.2,309.0 708.8,320.3 710.8,332.0 708.8,343.7 703.2,355.0 694.6,365.8 683.9,375.9 672.0,385.3 659.5,394.1 646.7,402.2 634.0,410.0 621.5,417.4 609.1,424.6 596.9,431.7"/></clipPath></defs><style>@keyframes fl{0%,100%{opacity:1}45%{opacity:.55}55%{opacity:.9}}.fl{animation:fl 7s ease-in-out infinite}@keyframes glow{0%,100%{opacity:1}50%{opacity:.6}}.glow{animation:glow 6s ease-in-out infinite}@keyframes flow{to{stroke-dashoffset:-60}}.flow{animation:flow 5s linear infinite}@keyframes ping{0%{r:3;opacity:.9}70%{r:11;opacity:0}100%{r:11;opacity:0}}.ping{animation:ping 3.2s ease-out infinite}@keyframes blink{50%{opacity:0}}.cur{animation:blink 1.05s step-end infinite}@keyframes w0{to{transform:translate(80.0px,46.2px)}}.w0{animation:w0 9.6s ease-in-out -5.4s infinite alternate}@keyframes w2{to{transform:translate(-221.6px,128.0px)}}.w2{animation:w2 15.7s ease-in-out -5.1s infinite alternate}@keyframes w3{to{transform:translate(-222.4px,128.4px)}}.w3{animation:w3 13.9s ease-in-out -13.4s infinite alternate}@keyframes w4{to{transform:translate(-119.9px,69.2px)}}.w4{animation:w4 14.8s ease-in-out -10.7s infinite alternate}@keyframes w6{to{transform:translate(137.3px,79.3px)}}.w6{animation:w6 11.0s ease-in-out -0.0s infinite alternate}@keyframes w7{to{transform:translate(-173.9px,100.4px)}}.w7{animation:w7 18.2s ease-in-out -3.7s infinite alternate}@keyframes w9{to{transform:translate(80.0px,46.2px)}}.w9{animation:w9 15.3s ease-in-out -12.9s infinite alternate}@keyframes w10{to{transform:translate(116.0px,67.0px)}}.w10{animation:w10 10.9s ease-in-out -7.8s infinite alternate}@keyframes w11{to{transform:translate(174.7px,100.9px)}}.w11{animation:w11 21.5s ease-in-out -20.2s infinite alternate}@keyframes w12{to{transform:translate(-75.0px,43.3px)}}.w12{animation:w12 9.4s ease-in-out -1.4s infinite alternate}@keyframes w13{to{transform:translate(-112.9px,65.2px)}}.w13{animation:w13 21.9s ease-in-out -1.0s infinite alternate}@keyframes w15{to{transform:translate(-213.7px,123.4px)}}.w15{animation:w15 19.7s ease-in-out -12.3s infinite alternate}@keyframes w16{to{transform:translate(-129.3px,74.7px)}}.w16{animation:w16 21.1s ease-in-out -11.7s infinite alternate}@keyframes w17{to{transform:translate(114.7px,66.2px)}}.w17{animation:w17 16.9s ease-in-out -14.4s infinite alternate}.narrow{display:none}@media (max-width:640px){.wide{display:none}.narrow{display:inline}.map{transform:translate(-40px,30px) scale(1.1)}}@media (prefers-reduced-motion:reduce){*{animation:none!important}}</style>
 <rect width="1200" height="660" rx="12" fill="#08090B" stroke="#252A31"/>
 <path d="M12 0h1176a12 12 0 0 1 12 12v40H0V12A12 12 0 0 1 12 0z" fill="#14171C"/>
@@ -38,10 +38,10 @@
 <ellipse cx="405.7" cy="183.5" rx="38" ry="20" fill="url(#g)" class="glow" style="animation-delay:-0.9s"/>
 <ellipse cx="491.4" cy="226.4" rx="36" ry="19" fill="url(#g)" class="glow" style="animation-delay:-0.6s"/>
 <ellipse cx="529.6" cy="252.8" rx="36" ry="19" fill="url(#g)" class="glow" style="animation-delay:-2.5s"/>
-<ellipse cx="499.1" cy="274.8" rx="52" ry="27" fill="url(#g)" class="glow" style="animation-delay:-1.6s"/>
+<ellipse cx="499.1" cy="274.8" rx="55" ry="29" fill="url(#g)" class="glow" style="animation-delay:-1.6s"/>
 <ellipse cx="451.4" cy="247.3" rx="34" ry="18" fill="url(#g)" class="glow" style="animation-delay:-1.3s"/>
-<ellipse cx="230.4" cy="286.9" rx="48" ry="25" fill="url(#g)" class="glow" style="animation-delay:-4.5s"/>
-<ellipse cx="563.8" cy="387.0" rx="43" ry="22" fill="url(#g)" class="glow" style="animation-delay:-0.7s"/>
+<ellipse cx="230.4" cy="286.9" rx="50" ry="26" fill="url(#g)" class="glow" style="animation-delay:-4.5s"/>
+<ellipse cx="563.8" cy="387.0" rx="45" ry="23" fill="url(#g)" class="glow" style="animation-delay:-0.7s"/>
 <ellipse cx="647.7" cy="325.4" rx="38" ry="20" fill="url(#g)" class="glow" style="animation-delay:-2.8s"/>
 <ellipse cx="516.2" cy="443.1" rx="38" ry="20" fill="url(#g)" class="glow" style="animation-delay:-3.0s"/>
 <ellipse cx="480.0" cy="422.2" rx="36" ry="19" fill="url(#g)" class="glow" style="animation-delay:-3.6s"/>
@@ -146,7 +146,7 @@
 <polygon points="200.6,272.5 206.0,275.7 206.0,269.1 200.6,265.9" fill="#1E232A"/>
 <polygon points="212.9,279.7 218.4,282.8 218.4,276.2 212.9,273.1" fill="#F2B66D"/>
 <polygon points="225.3,286.8 230.8,290.0 230.8,283.4 225.3,280.2" fill="#F2B66D"/>
-<polygon points="188.2,251.7 193.6,254.9 193.6,248.3 188.2,245.1" fill="#1E232A"/>
+<polygon points="188.2,251.7 193.6,254.9 193.6,248.3 188.2,245.1" fill="#F2B66D"/>
 <polygon points="200.6,258.9 206.0,262.0 206.0,255.4 200.6,252.3" fill="#F2B66D"/>
 <polygon points="212.9,266.0 218.4,269.2 218.4,262.6 212.9,259.4" fill="#F2B66D"/>
 <polygon points="225.3,273.2 230.8,276.3 230.8,269.7 225.3,266.6" fill="#F2B66D"/>
@@ -157,7 +157,7 @@
 <polygon points="273.2,269.5 268.6,272.1 268.6,265.5 273.2,262.9" fill="#F2B66D" class="fl" style="animation-delay:-5.3s"/>
 <polygon points="262.7,275.5 258.1,278.2 258.1,271.6 262.7,268.9" fill="#F2B66D" class="fl" style="animation-delay:-6.7s"/>
 <polygon points="252.3,281.6 247.7,284.2 247.7,277.6 252.3,275.0" fill="#F2B66D"/>
-<polygon points="241.8,287.6 237.2,290.3 237.2,283.7 241.8,281.0" fill="#1E232A"/>
+<polygon points="241.8,287.6 237.2,290.3 237.2,283.7 241.8,281.0" fill="#F2B66D"/>
 <polygon points="273.2,255.8 268.6,258.5 268.6,251.9 273.2,249.2" fill="#F2B66D" class="fl" style="animation-delay:-2.6s"/>
 <polygon points="262.7,261.9 258.1,264.5 258.1,257.9 262.7,255.3" fill="#F2B66D"/>
 <polygon points="252.3,267.9 247.7,270.6 247.7,264.0 252.3,261.3" fill="#F2B66D"/>
@@ -302,11 +302,11 @@
 <polygon points="549.3,383.7 554.0,386.4 554.0,379.8 549.3,377.1" fill="#F2B66D"/>
 <polygon points="560.0,389.8 564.7,392.5 564.7,385.9 560.0,383.2" fill="#F2B66D"/>
 <polygon points="517.3,351.5 522.0,354.3 522.0,347.7 517.3,344.9" fill="#F2B66D"/>
-<polygon points="528.0,357.7 532.7,360.4 532.7,353.8 528.0,351.1" fill="#1E232A"/>
+<polygon points="528.0,357.7 532.7,360.4 532.7,353.8 528.0,351.1" fill="#F2B66D"/>
 <polygon points="538.6,363.9 543.3,366.6 543.3,360.0 538.6,357.3" fill="#F2B66D"/>
 <polygon points="549.3,370.0 554.0,372.7 554.0,366.1 549.3,363.4" fill="#F2B66D"/>
 <polygon points="560.0,376.2 564.7,378.9 564.7,372.3 560.0,369.6" fill="#F2B66D" class="fl" style="animation-delay:-5.9s"/>
-<polygon points="610.2,383.3 605.2,386.3 605.2,379.7 610.2,376.7" fill="#1E232A"/>
+<polygon points="610.2,383.3 605.2,386.3 605.2,379.7 610.2,376.7" fill="#F2B66D" class="fl" style="animation-delay:-1.3s"/>
 <polygon points="598.8,389.9 593.7,392.9 593.7,386.3 598.8,383.3" fill="#1E232A"/>
 <polygon points="587.3,396.5 582.3,399.5 582.3,392.9 587.3,389.9" fill="#F2B66D" class="fl" style="animation-delay:-3.6s"/>
 <polygon points="575.9,403.1 570.9,406.1 570.9,399.5 575.9,396.5" fill="#F2B66D"/>
@@ -371,20 +371,20 @@
 <circle class="w15" cx="593.7" cy="316.7" r="2.3" fill="#F0883E" opacity=".85"/>
 <circle class="w16" cx="587.9" cy="320.1" r="2.3" fill="#F5F7FA" opacity=".85"/>
 <circle class="w17" cx="363.3" cy="319.4" r="2.3" fill="#F5F7FA" opacity=".85"/>
-<g class="wide"><line x1="400.0" y1="144.2" x2="460.0" y2="125.2" stroke="#4A515B"/><text x="464.0" y="121.2" text-anchor="start" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">LE PATRON <tspan fill="#F0883E">32</tspan></text></g>
+<g class="wide"><line x1="400.0" y1="144.2" x2="460.0" y2="125.2" stroke="#4A515B"/><text x="464.0" y="121.2" text-anchor="start" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">LE PATRON <tspan fill="#F0883E">38</tspan></text></g>
 <g class="wide"><line x1="405.7" y1="114.5" x2="345.7" y2="87.5" stroke="#4A515B"/><text x="341.7" y="83.5" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">LE COMPTOIR <tspan fill="#F0883E">5</tspan></text></g>
-<g class="wide"><line x1="230.4" y1="235.5" x2="166.4" y2="236.5" stroke="#4A515B"/><text x="162.4" y="232.5" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">L&#39;ÉCOLE <tspan fill="#F0883E">14</tspan></text></g>
-<g class="wide"><line x1="563.8" y1="335.6" x2="629.8" y2="282.6" stroke="#4A515B"/><text x="633.8" y="278.6" text-anchor="start" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">LE STUDIO <tspan fill="#F0883E">8</tspan></text></g>
+<g class="wide"><line x1="230.4" y1="235.5" x2="166.4" y2="236.5" stroke="#4A515B"/><text x="162.4" y="232.5" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">L&#39;ÉCOLE <tspan fill="#F0883E">16</tspan></text></g>
+<g class="wide"><line x1="563.8" y1="335.6" x2="629.8" y2="282.6" stroke="#4A515B"/><text x="633.8" y="278.6" text-anchor="start" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">LE STUDIO <tspan fill="#F0883E">10</tspan></text></g>
 <g class="wide"><line x1="257.1" y1="338.9" x2="201.1" y2="379.9" stroke="#4A515B"/><text x="197.1" y="375.9" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">L&#39;HÔPITAL <tspan fill="#F0883E">empty</tspan></text></g>
-<g class="wide"><line x1="310.5" y1="211.3" x2="270.5" y2="162.3" stroke="#4A515B"/><text x="266.5" y="158.3" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">LA BIBLIOTHÈQUE <tspan fill="#F0883E">3</tspan></text></g>
+<g class="wide"><line x1="310.5" y1="211.3" x2="270.5" y2="162.3" stroke="#4A515B"/><text x="266.5" y="158.3" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">LA BIBLIOTHÈQUE <tspan fill="#F0883E">5</tspan></text></g>
 </g>
 <g class="wide"><rect x="800" y="76" width="368" height="512" rx="10" fill="#101317" stroke="#232830"/>
 <text x="822" y="110" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="11.5" fill="#F0883E" letter-spacing="2">THE DAY OF 2026-11-03</text>
-<text x="820" y="172" font-family="-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="56" font-weight="700" fill="#F5F7FA" letter-spacing="-1">111</text>
+<text x="820" y="172" font-family="-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="56" font-weight="700" fill="#F5F7FA" letter-spacing="-1">126</text>
 <text x="822" y="196" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="13" fill="#8B949E">wake-ups across 14 agents <tspan fill="#4A515B">· 41 in the org</tspan></text>
 <line x1="822" y1="217" x2="1146" y2="217" stroke="#232830"/>
 <text x="822" y="236" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="11.5" fill="#8B949E" letter-spacing="1.3">WORK DONE</text>
-<text x="1146" y="236" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="13" fill="#F5F7FA">105</text>
+<text x="1146" y="236" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="13" fill="#F5F7FA">120</text>
 <line x1="822" y1="247" x2="1146" y2="247" stroke="#232830"/>
 <text x="822" y="266" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="11.5" fill="#8B949E" letter-spacing="1.3">ERRORS</text>
 <text x="1146" y="266" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="13" fill="#F85149">2</text>
@@ -399,10 +399,10 @@
 <text x="1146" y="356" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="13" fill="#F5F7FA">1 ready · 1 to show · 2 to rework</text>
 <line x1="822" y1="367" x2="1146" y2="367" stroke="#232830"/>
 <text x="822" y="386" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="11.5" fill="#8B949E" letter-spacing="1.3">VAULT WRITES</text>
-<text x="1146" y="386" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="13" fill="#F5F7FA">3</text>
+<text x="1146" y="386" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="13" fill="#F5F7FA">5</text>
 <line x1="822" y1="397" x2="1146" y2="397" stroke="#232830"/>
 <text x="822" y="416" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="11.5" fill="#8B949E" letter-spacing="1.3">TESTS DECLARED</text>
-<text x="1146" y="416" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="13" fill="#F5F7FA">1271</text>
+<text x="1146" y="416" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="13" fill="#F5F7FA">1322</text>
 <line x1="822" y1="431" x2="1146" y2="431" stroke="#232830"/>
 <text x="822" y="450" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="11.5" fill="#8B949E" letter-spacing="1.3">WAKE-UPS BY HOUR</text>
 <rect x="823.0" y="501.5" width="10.5" height="10.5" rx="1" fill="#F0883E"/>
@@ -425,9 +425,9 @@
 <rect x="1052.5" y="505.7" width="10.5" height="6.3" rx="1" fill="#F0883E"/>
 <rect x="1066.0" y="507.8" width="10.5" height="4.2" rx="1" fill="#F0883E"/>
 <rect x="1079.5" y="503.6" width="10.5" height="8.4" rx="1" fill="#F0883E"/>
-<rect x="1093.0" y="509.0" width="10.5" height="3.0" rx="1" fill="#F0883E"/>
-<rect x="1106.5" y="510.0" width="10.5" height="2.0" rx="1" fill="#232830"/>
-<rect x="1120.0" y="510.0" width="10.5" height="2.0" rx="1" fill="#232830"/>
+<rect x="1093.0" y="507.8" width="10.5" height="4.2" rx="1" fill="#F0883E"/>
+<rect x="1106.5" y="501.5" width="10.5" height="10.5" rx="1" fill="#F0883E"/>
+<rect x="1120.0" y="493.1" width="10.5" height="18.9" rx="1" fill="#F0883E"/>
 <rect x="1133.5" y="510.0" width="10.5" height="2.0" rx="1" fill="#232830"/>
 <text x="823.0" y="528" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#4A515B">00</text>
 <text x="904.0" y="528" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="10.5" fill="#4A515B">06</text>
@@ -440,7 +440,7 @@
 </g>
 <g class="narrow">
 <text x="1150" y="190" text-anchor="end" font-family="-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="104" font-weight="700" fill="#F5F7FA">14</text><text x="1150" y="232" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="30" fill="#8B949E">agents on duty</text>
-<text x="1150" y="340" text-anchor="end" font-family="-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="104" font-weight="700" fill="#F5F7FA">111</text><text x="1150" y="382" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="30" fill="#8B949E">wake-ups</text>
+<text x="1150" y="340" text-anchor="end" font-family="-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="104" font-weight="700" fill="#F5F7FA">126</text><text x="1150" y="382" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="30" fill="#8B949E">wake-ups</text>
 <text x="1150" y="490" text-anchor="end" font-family="-apple-system,'Segoe UI',Helvetica,Arial,sans-serif" font-size="104" font-weight="700" fill="#F85149">2</text><text x="1150" y="532" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="30" fill="#8B949E">errors</text>
 <text x="1150" y="630" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="28" fill="#F0883E">2026-11-03</text></g>
 <text x="34" y="616" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12.5" fill="#4A515B" class="wide">A building per agent. Lit windows: it worked that day. Counters only, never the contents.</text>

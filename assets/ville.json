@@ -1,14 +1,14 @@
 {
  "schema": 1,
  "date": "2026-11-03",
- "generated_at": "2026-11-03T20:15",
+ "generated_at": "2026-11-03T23:37",
  "agents": {
   "active": 14,
   "total": 41
  },
  "today": {
-  "wakes": 111,
-  "done": 105,
+  "wakes": 126,
+  "done": 120,
   "errors": 2,
   "capped": 4,
   "by_hour": [
@@ -32,9 +32,9 @@
    3,
    2,
    4,
-   1,
-   0,
-   0,
+   2,
+   5,
+   9,
    0
   ]
  },
@@ -49,10 +49,10 @@
   "ready": 1
  },
  "vault": {
-  "writes": 3
+  "writes": 5
  },
  "tests": {
-  "declared": 1271
+  "declared": 1322
  },
  "buildings": [
   {
@@ -60,8 +60,8 @@
    "name": "Le Patron",
    "quarter": "mairie",
    "role": "Reads every report, decides what reaches Martin and hands work to the quarters.",
-   "wakes": 32,
-   "done": 31,
+   "wakes": 38,
+   "done": 37,
    "errors": 1,
    "capped": 0,
    "in_hospital": false
@@ -104,8 +104,8 @@
    "name": "Le Tri",
    "quarter": "business",
    "role": "Sorts the inbox into piles. It reads, it never answers.",
-   "wakes": 19,
-   "done": 19,
+   "wakes": 24,
+   "done": 24,
    "errors": 0,
    "capped": 0,
    "in_hospital": false
@@ -126,8 +126,8 @@
    "name": "L'École",
    "quarter": "ecole",
    "role": "Keeps the school calendar and prepares what is due next.",
-   "wakes": 14,
-   "done": 14,
+   "wakes": 16,
+   "done": 16,
    "errors": 0,
    "capped": 0,
    "in_hospital": false
@@ -137,8 +137,8 @@
    "name": "Le Studio",
    "quarter": "studio",
    "role": "Briefs the design workshop and decides what gets shown.",
-   "wakes": 8,
-   "done": 8,
+   "wakes": 10,
+   "done": 10,
    "errors": 0,
    "capped": 0,
    "in_hospital": false
