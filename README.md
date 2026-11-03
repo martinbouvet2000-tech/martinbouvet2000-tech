@@ -4,6 +4,10 @@
 
 <sub>Not a decoration: this is last night's run. My second brain is consolidated by an agent at 00:30 every day, and this terminal is redrawn from what it actually did — counters only, never the contents. <a href="scripts/build_nightly.py">The generator</a> · <a href="https://github.com/martinbouvet2000-tech/nightshift">the agent, open source</a></sub>
 
+<a href="https://martinbouvet2000-tech.github.io/ville/"><img src="assets/ville.svg" alt="Isometric map of the agent city: one building per AI agent on duty, lit windows where it worked that day, and the day's wake-ups, errors and hourly rhythm" width="100%" /></a>
+
+<sub>By day, a small company of agents runs on the same laptop: one building per agent, a lit window for work done, a red one for an error. Redrawn every night from the company's own database, read-only, counters only, never the contents. <a href="https://martinbouvet2000-tech.github.io/ville/">Walk around it</a> · <a href="scripts/collect_ville.py">the collector and its whitelist</a></sub>
+
 ## I run a small factory of AI-powered products
 
 I study business at emlyon. I learned LLMs, generative and agentic AI at Oxford. Between the two, I build and ship.

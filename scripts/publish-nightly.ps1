@@ -12,8 +12,18 @@ if ($LASTEXITCODE -ne 0) { Write-Error "collect failed"; exit 1 }
 python scripts/build_nightly.py
 if ($LASTEXITCODE -ne 0) { Write-Error "build failed"; exit 1 }
 
-# Stage only our two files: the repo may hold unrelated work in progress.
-git add assets/last-run.json assets/nightly.svg
+# The agent city map: same path, same cost (read-only counters, no model).
+# A failure here must not cost the night its terminal, so it only warns.
+$ville = @()
+python scripts/collect_ville.py
+if ($LASTEXITCODE -eq 0) {
+    python scripts/build_ville.py
+    if ($LASTEXITCODE -eq 0) { $ville = @("assets/ville.json", "assets/ville.svg") }
+    else { Write-Warning "ville build failed - map left as it was" }
+} else { Write-Warning "ville collect failed - map left as it was" }
+
+# Stage only our files: the repo may hold unrelated work in progress.
+git add assets/last-run.json assets/nightly.svg @ville
 git diff --cached --quiet
 if ($LASTEXITCODE -eq 0) { Write-Host "same night, nothing to publish"; exit 0 }
 
