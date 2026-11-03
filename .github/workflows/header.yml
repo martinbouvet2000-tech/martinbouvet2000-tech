@@ -30,9 +30,12 @@ jobs:
       # days" line honest while the laptop is off.
       - name: Redraw last night
         run: python scripts/build_nightly.py
+      # Same for the city map: no new day without the laptop, but an honest age.
+      - name: Redraw the city
+        run: python scripts/build_ville.py
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/header.svg assets/nightly.svg
+          git add assets/header.svg assets/nightly.svg assets/ville.svg
           git diff --cached --quiet || git commit -m "chore: refresh the header" && git push
