@@ -21,6 +21,8 @@ T = {
     "mono": "ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace",
 }
 W, LINE, TOP, PAD = 1200, 26, 92, 34
+SCHEDULED = "00:30"   # when the night agent is due, Paris time
+ON_TIME_UNTIL = 6     # a run that finishes before 06:00 ran in its night
 DOTS = (("#FF5F57", 26), ("#FEBC2E", 46), ("#28C840", 66))
 
 
@@ -46,7 +48,35 @@ def lines(d):
         [(T["ok"], f'NIGHTSHIFT_OK notes={d["notes"]} links={d["links"]} '
                    f'proposals={d["proposals"]}')],
         [(T["faint"], "I read the proposals over coffee. The agent never decides.")],
-    ] + stale(d)
+    ] + (stale(d) or late(d))
+
+
+def finished(d):
+    return datetime.fromisoformat(d["finished_at"])
+
+
+def on_time(d):
+    return finished(d).hour < ON_TIME_UNTIL
+
+
+def title(d):
+    """The window title states when the run really happened.
+
+    A run the laptop slept through happens at the next wake-up, at 13:04 say.
+    Calling that "the night of" next to a 13:04 timestamp is the kind of
+    mismatch this whole page promises not to have.
+    """
+    at = finished(d).strftime("%H:%M")
+    if on_time(d):
+        return f'nightshift — the night of {d["night"]} · {at}'
+    return f'nightshift — catch-up run · {finished(d):%Y-%m-%d} {at}'
+
+
+def late(d):
+    if on_time(d):
+        return []
+    return [[(T["dim"], f'· due at {SCHEDULED}; the laptop was asleep, '
+                        f'so it ran at the next wake-up.')]]
 
 
 def stale(d):
@@ -55,7 +85,7 @@ def stale(d):
     The agent runs on my laptop. No laptop, no run — so rather than let an old
     night pass for last night, the terminal states its own age.
     """
-    age = (datetime.now() - datetime.fromisoformat(d["finished_at"])).days
+    age = (datetime.now() - finished(d)).days
     if age < 2:
         return []
     return [[(T["dim"], f'· no run for {age} days — laptop off. '
@@ -67,8 +97,9 @@ def svg(d):
     h = TOP + len(rows) * LINE + 34
     o = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{h}" '
          f'viewBox="0 0 {W} {h}" role="img" aria-labelledby="t d">',
-         '<title id="t">Last night&#39;s agent run</title>',
-         f'<desc id="d">Terminal replay of the {d["run_id"]} run: {d["notes"]} notes read, '
+         '<title id="t">The night agent&#39;s latest run</title>',
+         f'<desc id="d">Terminal replay of the {d["run_id"]} run, finished {d["finished_at"]}: '
+         f'{d["notes"]} notes read, '
          f'{d["links"]} links created, {d["proposals"]} changes proposed for review.</desc>',
          "<style>"
          # No fade-in on the lines. GitHub renders this file as an <img>, where
@@ -84,7 +115,7 @@ def svg(d):
     for col, cx in DOTS:
         o.append(f'<circle cx="{cx}" cy="26" r="6" fill="{col}"/>')
     o.append(f'<text x="{W / 2}" y="31" text-anchor="middle" font-family="{T["mono"]}" '
-             f'font-size="12.5" fill="{T["dim"]}">nightshift — the night of {d["night"]}</text>')
+             f'font-size="12.5" fill="{T["dim"]}">{title(d)}</text>')
 
     for i, row in enumerate(rows):
         if not row:

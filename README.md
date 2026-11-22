@@ -1,18 +1,10 @@
-<img src="assets/header.svg" alt="Martin Bouvet — system status: repositories, tests, CI, last ship, and the jobs that run every day" width="100%" />
-
-<img src="assets/nightly.svg" alt="Terminal replay of last night's agent run: notes read, links created, vault health, and the changes it proposed for review" width="100%" />
-
-<sub>Not a decoration: this is last night's run. My second brain is consolidated by an agent at 00:30 every day, and this terminal is redrawn from what it actually did — counters only, never the contents. <a href="scripts/build_nightly.py">The generator</a> · <a href="https://github.com/martinbouvet2000-tech/nightshift">the agent, open source</a></sub>
-
-<a href="https://martinbouvet2000-tech.github.io/ville/"><img src="assets/ville.svg" alt="Isometric map of the agent city: one building per AI agent on duty, lit windows where it worked that day, and the day's wake-ups, errors and hourly rhythm" width="100%" /></a>
-
-<sub>By day, a small company of agents runs on the same laptop: one building per agent, a lit window for work done, a red one for an error. Redrawn every night from the company's own database, read-only, counters only, never the contents. <a href="https://martinbouvet2000-tech.github.io/ville/">Walk around it</a> · <a href="scripts/collect_ville.py">the collector and its whitelist</a></sub>
+<img src="assets/header.svg" alt="Martin Bouvet — system status: repositories, tests, CI, latest release, and the jobs that run every day" width="100%" />
 
 ## I run a small factory of AI-powered products
 
 I study business at emlyon. I learned LLMs, generative and agentic AI at Oxford. Between the two, I build and ship.
 
-I work with AI agents the way a founder works with a small team: I own the problem, the product decisions and the trade-offs; the agents compress the distance between a decision and a shipped feature. Everything above runs on a schedule, and everything below is a repository you can open.
+I work with AI agents the way a founder works with a small team: I own the problem, the product decisions and the trade-offs; the agents compress the distance between a decision and a shipped feature. Below: the products first, then the systems behind them, running live.
 
 **[Portfolio: five case studies →](https://martinbouvet2000-tech.github.io/)**
 
@@ -53,6 +45,18 @@ I work with AI agents the way a founder works with a small team: I own the probl
 
 ---
 
+## Running right now
+
+<img src="assets/nightly.svg" alt="Terminal replay of the night agent's latest run: when it ran, notes read, links created, vault health, and the changes it proposed for review" width="100%" />
+
+<sub>Not a decoration: this is the night agent's latest real run. It is due at 00:30 every day to consolidate my second brain; when the laptop sleeps through it, it runs at the next wake-up and the title says so. Redrawn from what it actually did — counters only, never the contents. <a href="scripts/build_nightly.py">The generator</a> · <a href="https://github.com/martinbouvet2000-tech/nightshift">the agent, open source</a></sub>
+
+<a href="https://martinbouvet2000-tech.github.io/ville/"><img src="assets/ville.svg" alt="Isometric map of the agent city: one building per AI agent on duty, lit windows where it worked that day, and the day's wake-ups, errors and hourly rhythm" width="100%" /></a>
+
+<sub>By day, a small company of agents runs on the same laptop: one building per agent, a lit window for work done, a red one for an error. Redrawn every night from the company's own database, read-only, counters only, never the contents. <a href="https://martinbouvet2000-tech.github.io/ville/">Walk around it</a> · <a href="scripts/collect_ville.py">the collector and its whitelist</a></sub>
+
+---
+
 ## Operating model
 
 ```text
@@ -88,6 +92,6 @@ My second brain feeds the loop: versioned on GitHub, indexed so agents can searc
 
 ---
 
-<sub>Nothing on this page is hand-written twice. The header is rebuilt every morning from the GitHub API by <a href="scripts/build_header.py">a script in this repo</a>, the terminal at the top is redrawn from the night agent's own counters, and <a href="scripts/build_covers.py">the project covers</a> are generated the same way. If a number here is wrong, the fix is in the code, not in the prose.</sub>
+<sub>Nothing on this page is hand-written twice. The header is rebuilt every morning from the GitHub API by <a href="scripts/build_header.py">a script in this repo</a>, the terminal is redrawn from the night agent's own counters, the city from Founder OS's own database, and <a href="scripts/build_covers.py">the project covers</a> are generated the same way. If a number here is wrong, the fix is in the code, not in the prose.</sub>
 
 **Contact** — [portfolio](https://martinbouvet2000-tech.github.io/) · [discussions](https://github.com/martinbouvet2000-tech/martinbouvet2000-tech/discussions) · [issues on nightshift](https://github.com/martinbouvet2000-tech/nightshift/issues)

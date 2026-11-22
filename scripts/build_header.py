@@ -44,7 +44,7 @@ query($login: String!) {
   user(login: $login) {
     repositories(first: 100, ownerAffiliations: OWNER, isFork: false, privacy: PUBLIC) {
       totalCount
-      nodes { name pushedAt }
+      nodes { name latestRelease { tagName publishedAt } }
     }
     contributionsCollection {
       commitContributionsByRepository(maxRepositories: 100) {
@@ -64,6 +64,21 @@ def gh(url):
         return json.load(r)
 
 
+def latest_release(nodes):
+    """(repo, tag) of the most recent release across public repos, or None.
+
+    A release is a deliberate ship with a version on it. Unlike "last push",
+    it does not turn into a countdown when I spend three weeks selling instead
+    of committing, and it still links to something a visitor can open.
+    """
+    tagged = [(n["latestRelease"]["publishedAt"], n["name"], n["latestRelease"]["tagName"])
+              for n in nodes if n.get("latestRelease") and n["latestRelease"].get("publishedAt")]
+    if not tagged:
+        return None
+    _, repo, tag = max(tagged)
+    return repo, tag
+
+
 def fetch():
     body = json.dumps({"query": QUERY, "variables": {"login": USER}}).encode()
     req = urllib.request.Request(
@@ -76,14 +91,7 @@ def fetch():
     user = data["data"]["user"]
     now = datetime.now(timezone.utc)
 
-    # The profile repo pushes itself every morning; it is not work, so it never counts as a ship.
-    pushes = [(n["pushedAt"], n["name"]) for n in user["repositories"]["nodes"]
-              if n["pushedAt"] and n["name"] != USER]
-    last_at, last_repo = max(pushes)
-    delta = now - datetime.fromisoformat(last_at.replace("Z", "+00:00"))
-    mins = int(delta.total_seconds() // 60)
-    last_ship = f"{mins}m ago" if mins < 60 else (
-        f"{mins // 60}h ago" if mins < 1440 else f"{mins // 1440}d ago")
+    release = latest_release(user["repositories"]["nodes"])
 
     try:  # latest CI conclusion on the flagship repo
         runs = gh(f"https://api.github.com/repos/{USER}/nightshift/actions/workflows/ci.yml/runs?per_page=1")
@@ -99,8 +107,7 @@ def fetch():
         "commits": commits,
         "tests": sum(TESTS.values()),
         "ci": ci,
-        "last_ship": last_ship,
-        "last_repo": last_repo,
+        "release": f"{release[0]} {release[1]}" if release else "none yet",
         "built": now.strftime("%Y-%m-%d %H:%M UTC"),
     }
 
@@ -111,7 +118,7 @@ def svg(s):
         f'role="img" aria-labelledby="ttl dsc">',
         '<title id="ttl">Martin Bouvet — system status</title>',
         f'<desc id="dsc">Control-room header: {s["repos"]} repositories, {s["tests"]} tests in public '
-        f'repositories, CI {s["ci"]}, last push {s["last_ship"]}, and the five jobs that run every day.</desc>',
+        f'repositories, CI {s["ci"]}, latest release {escape(s["release"])}, and the five jobs that run every day.</desc>',
         "<style>"
         "@keyframes blink{50%{opacity:0}}.cur{animation:blink 1.05s step-end infinite}"
         "@keyframes ping{0%{r:4;opacity:.9}70%{r:13;opacity:0}100%{r:13;opacity:0}}"
@@ -144,7 +151,7 @@ def svg(s):
         ("TESTS / PUBLIC", str(s["tests"]), T["text"]),
         ("PUBLIC COMMITS / 12 MO", str(s["commits"]), T["text"]),
         ("CI", s["ci"], T["ok"] if s["ci"] == "SUCCESS" else T["accent"]),
-        ("LAST SHIP", f'{s["last_ship"]} · {s["last_repo"]}', T["accent"]),
+        ("LATEST RELEASE", s["release"], T["accent"]),
     ]
     for i, (k, v, col) in enumerate(rows):
         y = py + 34 + i * 28
