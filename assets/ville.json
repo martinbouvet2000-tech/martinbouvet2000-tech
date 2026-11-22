@@ -1,58 +1,58 @@
 {
  "schema": 1,
- "date": "2026-11-03",
- "generated_at": "2026-11-03T23:37",
+ "date": "2026-11-22",
+ "generated_at": "2026-11-22T13:13",
  "agents": {
-  "active": 14,
-  "total": 41
+  "active": 17,
+  "total": 44
  },
  "today": {
-  "wakes": 126,
-  "done": 120,
-  "errors": 2,
-  "capped": 4,
+  "wakes": 12,
+  "done": 12,
+  "errors": 0,
+  "capped": 0,
   "by_hour": [
-   5,
-   7,
    0,
    0,
    0,
    0,
    0,
    0,
-   16,
-   4,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
    12,
-   7,
-   2,
-   10,
-   13,
-   21,
-   4,
-   3,
-   2,
-   4,
-   2,
-   5,
-   9,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
    0
   ]
  },
  "hospital": {
-  "patients": 0
+  "patients": 2
  },
  "studio": {
   "no_capture": 0,
   "to_score": 0,
-  "to_rework": 2,
+  "to_rework": 4,
   "to_show": 1,
-  "ready": 1
+  "ready": 2
  },
  "vault": {
-  "writes": 5
+  "writes": 0
  },
  "tests": {
-  "declared": 1322
+  "declared": 1434
  },
  "buildings": [
   {
@@ -60,9 +60,9 @@
    "name": "Le Patron",
    "quarter": "mairie",
    "role": "Reads every report, decides what reaches Martin and hands work to the quarters.",
-   "wakes": 38,
-   "done": 37,
-   "errors": 1,
+   "wakes": 3,
+   "done": 3,
+   "errors": 0,
    "capped": 0,
    "in_hospital": false
   },
@@ -71,10 +71,10 @@
    "name": "Le Comptoir",
    "quarter": "business",
    "role": "Runs the business quarter and sets the day's order for its agents.",
-   "wakes": 5,
-   "done": 4,
+   "wakes": 2,
+   "done": 2,
    "errors": 0,
-   "capped": 1,
+   "capped": 0,
    "in_hospital": false
   },
   {
@@ -82,8 +82,8 @@
    "name": "Le Prospecteur",
    "quarter": "business",
    "role": "Looks for small businesses the audit offer could help.",
-   "wakes": 3,
-   "done": 3,
+   "wakes": 0,
+   "done": 0,
    "errors": 0,
    "capped": 0,
    "in_hospital": false
@@ -93,8 +93,8 @@
    "name": "La Plume",
    "quarter": "business",
    "role": "Drafts first messages and follow-ups. Nothing leaves without Martin.",
-   "wakes": 3,
-   "done": 3,
+   "wakes": 0,
+   "done": 0,
    "errors": 0,
    "capped": 0,
    "in_hospital": false
@@ -104,21 +104,21 @@
    "name": "Le Tri",
    "quarter": "business",
    "role": "Sorts the inbox into piles. It reads, it never answers.",
-   "wakes": 24,
-   "done": 24,
+   "wakes": 1,
+   "done": 1,
    "errors": 0,
    "capped": 0,
-   "in_hospital": false
+   "in_hospital": true
   },
   {
    "key": "compteur",
    "name": "Le Compteur",
    "quarter": "business",
    "role": "Counts what the city produced and what it cost.",
-   "wakes": 4,
-   "done": 2,
-   "errors": 1,
-   "capped": 1,
+   "wakes": 1,
+   "done": 1,
+   "errors": 0,
+   "capped": 0,
    "in_hospital": false
   },
   {
@@ -126,19 +126,19 @@
    "name": "L'École",
    "quarter": "ecole",
    "role": "Keeps the school calendar and prepares what is due next.",
-   "wakes": 16,
-   "done": 16,
+   "wakes": 1,
+   "done": 1,
    "errors": 0,
    "capped": 0,
-   "in_hospital": false
+   "in_hospital": true
   },
   {
    "key": "studio",
    "name": "Le Studio",
    "quarter": "studio",
    "role": "Briefs the design workshop and decides what gets shown.",
-   "wakes": 10,
-   "done": 10,
+   "wakes": 0,
+   "done": 0,
    "errors": 0,
    "capped": 0,
    "in_hospital": false
@@ -148,10 +148,10 @@
    "name": "Graphisme",
    "quarter": "studio",
    "role": "Draws layouts and type for the workshop.",
-   "wakes": 5,
-   "done": 4,
+   "wakes": 0,
+   "done": 0,
    "errors": 0,
-   "capped": 1,
+   "capped": 0,
    "in_hospital": false
   },
   {
@@ -170,10 +170,10 @@
    "name": "Mouvement",
    "quarter": "studio",
    "role": "Works on motion: easing, timing, transitions.",
-   "wakes": 5,
-   "done": 4,
+   "wakes": 0,
+   "done": 0,
    "errors": 0,
-   "capped": 1,
+   "capped": 0,
    "in_hospital": false
   },
   {
@@ -181,8 +181,41 @@
    "name": "Le Critique",
    "quarter": "studio",
    "role": "Scores every mockup before Martin does.",
-   "wakes": 3,
-   "done": 3,
+   "wakes": 0,
+   "done": 0,
+   "errors": 0,
+   "capped": 0,
+   "in_hospital": false
+  },
+  {
+   "key": "atelier-1",
+   "name": "Un atelier",
+   "quarter": "faubourg",
+   "role": "A newer agent, not yet described on this map.",
+   "wakes": 0,
+   "done": 0,
+   "errors": 0,
+   "capped": 0,
+   "in_hospital": false
+  },
+  {
+   "key": "atelier-2",
+   "name": "Un atelier",
+   "quarter": "faubourg",
+   "role": "A newer agent, not yet described on this map.",
+   "wakes": 0,
+   "done": 0,
+   "errors": 0,
+   "capped": 0,
+   "in_hospital": false
+  },
+  {
+   "key": "atelier-3",
+   "name": "Un atelier",
+   "quarter": "faubourg",
+   "role": "A newer agent, not yet described on this map.",
+   "wakes": 0,
+   "done": 0,
    "errors": 0,
    "capped": 0,
    "in_hospital": false
@@ -192,8 +225,8 @@
    "name": "Le Relecteur",
    "quarter": "ecole",
    "role": "Rereads every draft before Martin sees it.",
-   "wakes": 5,
-   "done": 5,
+   "wakes": 2,
+   "done": 2,
    "errors": 0,
    "capped": 0,
    "in_hospital": false
