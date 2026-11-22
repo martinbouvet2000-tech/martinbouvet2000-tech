@@ -381,12 +381,12 @@
 <ellipse cx="415.7" cy="506.2" rx="5" ry="2.4" fill="#07080A"/><circle cx="415.7" cy="500.2" r="5.4" fill="#16251C"/>
 <circle class="w0" cx="505.3" cy="300.2" r="2.3" fill="#F0883E" opacity=".85"/>
 <circle class="w2" cx="582.9" cy="322.9" r="2.3" fill="#F5F7FA" opacity=".85"/>
-<g class="wide"><line x1="400.0" y1="144.2" x2="460.0" y2="125.2" stroke="#4A515B"/><text x="464.0" y="121.2" text-anchor="start" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">LE PATRON <tspan fill="#F0883E">3</tspan></text></g>
-<g class="wide"><line x1="405.7" y1="114.5" x2="345.7" y2="87.5" stroke="#4A515B"/><text x="341.7" y="83.5" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">LE COMPTOIR <tspan fill="#F0883E">2</tspan></text></g>
-<g class="wide"><line x1="230.4" y1="235.5" x2="166.4" y2="236.5" stroke="#4A515B"/><text x="162.4" y="232.5" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">L&#39;ÉCOLE <tspan fill="#F0883E">1</tspan></text></g>
-<g class="wide"><line x1="563.8" y1="335.6" x2="629.8" y2="282.6" stroke="#4A515B"/><text x="633.8" y="278.6" text-anchor="start" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">LE STUDIO <tspan fill="#F0883E">0</tspan></text></g>
-<g class="wide"><line x1="257.1" y1="338.9" x2="201.1" y2="379.9" stroke="#4A515B"/><text x="197.1" y="375.9" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">L&#39;HÔPITAL <tspan fill="#F0883E">2 in</tspan></text></g>
-<g class="wide"><line x1="310.5" y1="211.3" x2="270.5" y2="162.3" stroke="#4A515B"/><text x="266.5" y="158.3" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">LA BIBLIOTHÈQUE <tspan fill="#F0883E">0</tspan></text></g>
+<g class="wide"><line x1="400.0" y1="144.2" x2="460.0" y2="125.2" stroke="#4A515B"/><text x="464.0" y="121.2" text-anchor="start" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">HQ <tspan fill="#F0883E">3</tspan></text></g>
+<g class="wide"><line x1="405.7" y1="114.5" x2="345.7" y2="87.5" stroke="#4A515B"/><text x="341.7" y="83.5" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">BUSINESS <tspan fill="#F0883E">2</tspan></text></g>
+<g class="wide"><line x1="230.4" y1="235.5" x2="166.4" y2="236.5" stroke="#4A515B"/><text x="162.4" y="232.5" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">SCHOOL <tspan fill="#F0883E">1</tspan></text></g>
+<g class="wide"><line x1="563.8" y1="335.6" x2="629.8" y2="282.6" stroke="#4A515B"/><text x="633.8" y="278.6" text-anchor="start" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">DESIGN STUDIO <tspan fill="#F0883E">0</tspan></text></g>
+<g class="wide"><line x1="257.1" y1="338.9" x2="201.1" y2="379.9" stroke="#4A515B"/><text x="197.1" y="375.9" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">REPAIR SHOP <tspan fill="#F0883E">2 in</tspan></text></g>
+<g class="wide"><line x1="310.5" y1="211.3" x2="270.5" y2="162.3" stroke="#4A515B"/><text x="266.5" y="158.3" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="12" fill="#8B949E" letter-spacing=".6">LIBRARY <tspan fill="#F0883E">0</tspan></text></g>
 </g>
 <g class="wide"><rect x="800" y="76" width="368" height="512" rx="10" fill="#101317" stroke="#232830"/>
 <text x="822" y="110" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="11.5" fill="#F0883E" letter-spacing="2">THE DAY OF 2026-11-22</text>
@@ -399,19 +399,19 @@
 <text x="822" y="266" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="11.5" fill="#8B949E" letter-spacing="1.3">ERRORS</text>
 <text x="1146" y="266" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="13" fill="#F5F7FA">0</text>
 <line x1="822" y1="277" x2="1146" y2="277" stroke="#232830"/>
-<text x="822" y="296" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="11.5" fill="#8B949E" letter-spacing="1.3">STOPPED AT BUDGET CAP</text>
+<text x="822" y="296" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="11.5" fill="#8B949E" letter-spacing="1.3">BLOCKED BY BUDGET CAP</text>
 <text x="1146" y="296" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="13" fill="#F5F7FA">0</text>
 <line x1="822" y1="307" x2="1146" y2="307" stroke="#232830"/>
-<text x="822" y="326" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="11.5" fill="#8B949E" letter-spacing="1.3">HOSPITAL</text>
-<text x="1146" y="326" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="13" fill="#F5F7FA">2 agents in</text>
+<text x="822" y="326" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="11.5" fill="#8B949E" letter-spacing="1.3">FAILING AGENTS IN REPAIR</text>
+<text x="1146" y="326" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="13" fill="#F5F7FA">2</text>
 <line x1="822" y1="337" x2="1146" y2="337" stroke="#232830"/>
-<text x="822" y="356" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="11.5" fill="#8B949E" letter-spacing="1.3">STUDIO</text>
+<text x="822" y="356" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="11.5" fill="#8B949E" letter-spacing="1.3">MOCKUPS</text>
 <text x="1146" y="356" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="13" fill="#F5F7FA">2 ready · 1 to show · 4 to rework</text>
 <line x1="822" y1="367" x2="1146" y2="367" stroke="#232830"/>
-<text x="822" y="386" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="11.5" fill="#8B949E" letter-spacing="1.3">VAULT WRITES</text>
+<text x="822" y="386" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="11.5" fill="#8B949E" letter-spacing="1.3">NOTES WRITTEN TO VAULT</text>
 <text x="1146" y="386" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="13" fill="#F5F7FA">0</text>
 <line x1="822" y1="397" x2="1146" y2="397" stroke="#232830"/>
-<text x="822" y="416" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="11.5" fill="#8B949E" letter-spacing="1.3">TESTS DECLARED</text>
+<text x="822" y="416" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="11.5" fill="#8B949E" letter-spacing="1.3">FOUNDER OS TESTS</text>
 <text x="1146" y="416" text-anchor="end" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="13" fill="#F5F7FA">1434</text>
 <line x1="822" y1="431" x2="1146" y2="431" stroke="#232830"/>
 <text x="822" y="450" font-family="ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace" font-size="11.5" fill="#8B949E" letter-spacing="1.3">WAKE-UPS BY HOUR</text>

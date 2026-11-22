@@ -59,6 +59,10 @@ RIVER = (12.4, 13.8)
 STREETS_X = (1.4, 6.0, 11.4, 14.6)   # streets running along grid y
 STREETS_Y = (1.0, 6.0, 10.6, 14.2, 18.6)  # streets running along grid x
 LABELS = {"patron", "comptoir", "ecole", "studio", "medecin"}
+# The profile is in English. The agents keep their French names inside
+# Founder OS and in ville.json; the map shows what each building does.
+NAMES = {"patron": "HQ", "comptoir": "Business", "ecole": "School",
+         "studio": "Design studio", "medecin": "Repair shop", "library": "Library"}
 
 
 def h01(*parts):
@@ -353,9 +357,9 @@ def svg(d, now):
             z = h + (2.5 if key == "patron" else 0)
             val = (("empty" if not d["hospital"]["patients"] else f'{d["hospital"]["patients"]} in')
                    if key == "medecin" else str(b["wakes"]))
-            label(x + w / 2, y + dd / 2, z, b["name"], val, side[key])
+            label(x + w / 2, y + dd / 2, z, NAMES.get(key, b["name"]), val, side[key])
     lx, ly, lw, ld, lh = LIBRARY
-    label(lx + lw / 2, ly + ld / 2, lh, "La Bibliothèque", d["vault"]["writes"], side["library"])
+    label(lx + lw / 2, ly + ld / 2, lh, NAMES["library"], d["vault"]["writes"], side["library"])
 
     o.append("</g>")
 
@@ -376,12 +380,12 @@ def svg(d, now):
                              ("to_score", "to score")) if st[k]) or "none"
     rows = [("WORK DONE", str(t["done"]), T["text"]),
             ("ERRORS", str(t["errors"]), T["red"] if t["errors"] else T["text"]),
-            ("STOPPED AT BUDGET CAP", str(t["capped"]), T["text"]),
-            ("HOSPITAL", "empty" if not d["hospital"]["patients"]
-             else f'{d["hospital"]["patients"]} agent{"s" * (d["hospital"]["patients"] > 1)} in', T["text"]),
-            ("STUDIO", studio_txt, T["text"]),
-            ("VAULT WRITES", str(d["vault"]["writes"]), T["text"]),
-            ("TESTS DECLARED", str(d["tests"]["declared"]), T["text"])]
+            ("BLOCKED BY BUDGET CAP", str(t["capped"]), T["text"]),
+            ("FAILING AGENTS IN REPAIR", str(d["hospital"]["patients"]) if d["hospital"]["patients"]
+             else "none", T["text"]),
+            ("MOCKUPS", studio_txt, T["text"]),
+            ("NOTES WRITTEN TO VAULT", str(d["vault"]["writes"]), T["text"]),
+            ("FOUNDER OS TESTS", str(d["tests"]["declared"]), T["text"])]
     y = py + 160
     for name, val, col in rows:
         o.append(f'<line x1="{px + 22}" y1="{y - 19}" x2="{px + pw - 22}" y2="{y - 19}" stroke="{T["rule"]}"/>')
