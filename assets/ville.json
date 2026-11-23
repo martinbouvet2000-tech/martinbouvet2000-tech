@@ -1,16 +1,16 @@
 {
  "schema": 1,
- "date": "2026-11-22",
- "generated_at": "2026-11-22T13:13",
+ "date": "2026-11-23",
+ "generated_at": "2026-11-23T23:51",
  "agents": {
   "active": 17,
   "total": 44
  },
  "today": {
-  "wakes": 12,
-  "done": 12,
-  "errors": 0,
-  "capped": 0,
+  "wakes": 60,
+  "done": 58,
+  "errors": 1,
+  "capped": 1,
   "by_hour": [
    0,
    0,
@@ -20,26 +20,26 @@
    0,
    0,
    0,
+   3,
+   5,
+   13,
+   2,
+   1,
+   4,
+   6,
    0,
-   0,
-   0,
-   0,
-   0,
-   12,
-   0,
-   0,
-   0,
-   0,
-   0,
-   0,
-   0,
-   0,
-   0,
+   4,
+   3,
+   4,
+   4,
+   2,
+   3,
+   6,
    0
   ]
  },
  "hospital": {
-  "patients": 2
+  "patients": 0
  },
  "studio": {
   "no_capture": 0,
@@ -49,10 +49,10 @@
   "ready": 2
  },
  "vault": {
-  "writes": 0
+  "writes": 1
  },
  "tests": {
-  "declared": 1434
+  "declared": 1441
  },
  "buildings": [
   {
@@ -60,8 +60,8 @@
    "name": "Le Patron",
    "quarter": "mairie",
    "role": "Reads every report, decides what reaches Martin and hands work to the quarters.",
-   "wakes": 3,
-   "done": 3,
+   "wakes": 10,
+   "done": 10,
    "errors": 0,
    "capped": 0,
    "in_hospital": false
@@ -71,10 +71,10 @@
    "name": "Le Comptoir",
    "quarter": "business",
    "role": "Runs the business quarter and sets the day's order for its agents.",
-   "wakes": 2,
-   "done": 2,
+   "wakes": 5,
+   "done": 4,
    "errors": 0,
-   "capped": 0,
+   "capped": 1,
    "in_hospital": false
   },
   {
@@ -82,8 +82,8 @@
    "name": "Le Prospecteur",
    "quarter": "business",
    "role": "Looks for small businesses the audit offer could help.",
-   "wakes": 0,
-   "done": 0,
+   "wakes": 2,
+   "done": 2,
    "errors": 0,
    "capped": 0,
    "in_hospital": false
@@ -93,8 +93,8 @@
    "name": "La Plume",
    "quarter": "business",
    "role": "Drafts first messages and follow-ups. Nothing leaves without Martin.",
-   "wakes": 0,
-   "done": 0,
+   "wakes": 1,
+   "done": 1,
    "errors": 0,
    "capped": 0,
    "in_hospital": false
@@ -104,20 +104,20 @@
    "name": "Le Tri",
    "quarter": "business",
    "role": "Sorts the inbox into piles. It reads, it never answers.",
-   "wakes": 1,
-   "done": 1,
+   "wakes": 22,
+   "done": 22,
    "errors": 0,
    "capped": 0,
-   "in_hospital": true
+   "in_hospital": false
   },
   {
    "key": "compteur",
    "name": "Le Compteur",
    "quarter": "business",
    "role": "Counts what the city produced and what it cost.",
-   "wakes": 1,
-   "done": 1,
-   "errors": 0,
+   "wakes": 4,
+   "done": 3,
+   "errors": 1,
    "capped": 0,
    "in_hospital": false
   },
@@ -126,11 +126,11 @@
    "name": "L'École",
    "quarter": "ecole",
    "role": "Keeps the school calendar and prepares what is due next.",
-   "wakes": 1,
-   "done": 1,
+   "wakes": 10,
+   "done": 10,
    "errors": 0,
    "capped": 0,
-   "in_hospital": true
+   "in_hospital": false
   },
   {
    "key": "studio",
